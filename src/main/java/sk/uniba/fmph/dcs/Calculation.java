@@ -1,5 +1,7 @@
 package sk.uniba.fmph.dcs;
 
+import java.util.Optional;
+
 public interface Calculation {
-    public int calculate(int a, int b);
+    public int calculate(Optional<Tile>[][] wall);
 }
