@@ -7,9 +7,15 @@ public final class Bag implements BagInterface{
     private ArrayList<Tile> tiles;
     private final UsedTileTakeInterface usedTiles;
 
-    public Bag(UsedTileTakeInterface usedTiles) {
+    public Bag(final UsedTileTakeInterface usedTiles) {
         tiles = new ArrayList<>();
         this.usedTiles = usedTiles;
+
+        for(Tile tile : List.of(Tile.RED, Tile.GREEN, Tile.YELLOW, Tile.BLUE, Tile.BLACK))
+            for(int i = 0; i < 20; i++)
+                tiles.add(tile);
+
+        Collections.shuffle(tiles);
     }
 
     @Override
