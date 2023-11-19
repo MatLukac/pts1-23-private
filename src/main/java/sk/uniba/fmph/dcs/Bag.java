@@ -11,11 +11,15 @@ public class Bag implements BagInterface{
     }
     @Override
     public ArrayList<Tile> take(int count) {
-        return null;
+        ArrayList<Tile> toReturn = new ArrayList<>();
+        return toReturn;
     }
 
     @Override
     public String state() {
-        return null;
+        String s = "";
+        for(Tile tile : tiles)
+            s += tile.toString();
+        return s;
     }
 }
