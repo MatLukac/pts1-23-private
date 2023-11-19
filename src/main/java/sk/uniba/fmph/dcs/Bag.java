@@ -1,8 +1,7 @@
 package sk.uniba.fmph.dcs;
 
-import java.awt.List;
+import java.util.ArrayList;
 import java.util.*;
-import java.util.random.*;
 
 public final class Bag implements BagInterface{
     private ArrayList<Tile> tiles;
