@@ -6,15 +6,20 @@ public class PatternLine implements PatternLineInterface{
     private final int capacity;
     private final WallLineInterface wallLine;
     private final FloorPutInterface floor;
-    private final UsedTilesGiveInterface usedTyles;
+    private final UsedTilesGiveInterface usedTiles;
     private ArrayList<Tile> tiles;
 
-    public PatternLine(int capacity, WallLineInterface wallLine, FloorPutInterface floor, UsedTilesGiveInterface usedTyles){
+    public PatternLine(int capacity, WallLineInterface wallLine, FloorPutInterface floor, UsedTilesGiveInterface usedTiles){
         this.capacity = capacity;
         this.wallLine = wallLine;
         this.floor = floor;
-        this.usedTyles = usedTyles;
+        this.usedTiles = usedTiles;
         tiles = new ArrayList();
+
+        for(Tile tile : List.of(Tile.RED, Tile.BLUE, Tile.BLACK, Tile.GREEN, Tile.YELLOW))
+            for(int i = 0; i < 20; i++)
+                tiles.add(tile);
+        Collections.shuffle(tiles);
     }
 
     @Override
@@ -28,15 +33,15 @@ public class PatternLine implements PatternLineInterface{
             if(this.tiles.size() != capacity) this.tiles.add(tile);
             else fallingTile.add(tile);
         }
-        if(fallingTile.size() != 0) usedTyles.give(fallingTile);
+        if(fallingTile.size() != 0) usedTiles.give(fallingTile);
     }
 
     @Override
     public Points finishRound() {
-        if(tiles.size() != capacity) return null;
+        if(tiles.size() != capacity) new Points(0);
         Tile tile = tiles.get(0);
         tiles.remove(tile);
-        usedTyles.give(tiles);
+        usedTiles.give(tiles);
         tiles.removeAll(tiles);
         return wallLine.putTile(tile);
     }
