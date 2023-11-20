@@ -13,7 +13,7 @@ public class Vertical implements Calculation {
         int totalPoints = 0;
         for (int col = 0; col < wall.length; col++) {
             if (isColumnComplete(wall, col)) {
-                totalPoints += 2;
+                totalPoints += 7;
             }
         }
         return totalPoints;

@@ -12,7 +12,7 @@ public class Horizontal implements Calculation {
         int totalPoints = 0;
         for (int row = 0; row < wall.length; row++) {
             if (isRowComplete(wall, row)) {
-                totalPoints += 7;
+                totalPoints += 2;
             }
         }
         return totalPoints;
