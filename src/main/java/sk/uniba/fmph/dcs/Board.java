@@ -3,16 +3,22 @@ package sk.uniba.fmph.dcs;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 public class Board {
     private final Floor floor;
     private final Points points;
-    private List<PatternLine> patternLines;
-    private List<WallLine> wallLines;
-    private final FinalPointsCalculation finalPointsCalculation = new FinalPointsCalculation();
+    private List<PatternLineInterface> patternLines;
+    private List<WallLineInterface> wallLines;
+    private final FinalPointsCalculationInterface finalPointsCalculation = new FinalPointsCalculationInterface() {
+        @Override
+        public Points getPoints(List<Optional<Tile>> wall) {
+            return null;
+        }
+    };
 
-    public Board(Floor floor, Points points, List<PatternLine> patternLines, List<WallLine> wallLines) {
+    public Board(Floor floor, Points points, List<PatternLineInterface> patternLines, List<WallLineInterface> wallLines) {
 
         this.floor = floor;
         this.points = points;
@@ -40,7 +46,7 @@ public class Board {
 
     public FinishRoundResult finishRound() {
 
-        for (PatternLine patternLine : patternLines) {
+        for (PatternLineInterface patternLine : patternLines) {
 
             points.add(patternLine.finishRound());
         }
@@ -53,7 +59,7 @@ public class Board {
     public void endGame() {
 
         Tile[][] wall = wallLines.stream()
-                .map(WallLine::getTiles)
+                .map(WallLineInterface::getTiles)
                 .toArray(Tile[][]::new);
 
         Points finalPoints = finalPointsCalculation.getPoints(wall);
@@ -66,13 +72,13 @@ public class Board {
 
         // Append state of each pattern line
         stateBuilder.append("Pattern Lines:\n");
-        for (PatternLine patternLine : patternLines) {
+        for (PatternLineInterface patternLine : patternLines) {
             stateBuilder.append(patternLine.state()).append("\n"); // Using state method of PatternLine
         }
 
         // Append state of each wall line
         stateBuilder.append("Wall Lines:\n");
-        for (WallLine wallLine : wallLines) {
+        for (WallLineInterface wallLine : wallLines) {
             stateBuilder.append(wallLine.state()).append("\n");
         }
 
