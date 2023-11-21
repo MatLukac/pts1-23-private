@@ -1,9 +1,6 @@
 package sk.uniba.fmph.dcs;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class Board {
@@ -11,12 +8,7 @@ public class Board {
     private final Points points;
     private List<PatternLineInterface> patternLines;
     private List<WallLineInterface> wallLines;
-    private final FinalPointsCalculationInterface finalPointsCalculation = new FinalPointsCalculationInterface() {
-        @Override
-        public Points getPoints(List<Optional<Tile>> wall) {
-            return null;
-        }
-    };
+    private final FinalPointsCalculation finalPointsCalculation = new FinalPointsCalculation();
 
     public Board(Floor floor, Points points, List<PatternLineInterface> patternLines, List<WallLineInterface> wallLines) {
 
@@ -53,17 +45,37 @@ public class Board {
 
         points.add(floor.finishRound());
 
-        return GameFinished.gameFinished(wallLines);
+        Optional<Tile>[][] wallTiles = new Optional[wallLines.size()][];
+        for (int i = 0; i < wallLines.size(); i++) {
+            wallTiles[i] = wallLines.get(i).getTiles().toArray(new Optional[0]);
+        }
+
+        FinishRoundResult result = GameFinished.gameFinished(wallTiles);
+
+        return result;
+
     }
 
     public void endGame() {
 
-        Tile[][] wall = wallLines.stream()
+        Tile[][] wallTiles = wallLines.stream()
                 .map(WallLineInterface::getTiles)
                 .toArray(Tile[][]::new);
 
-        Points finalPoints = finalPointsCalculation.getPoints(wall);
+        // Convert it into an Optional<Tile>[][] array
+        List<Optional[]> list = new ArrayList<>();
+        for (Tile[] row : wallTiles) {
+            Optional[] optionals = Arrays.stream(row)
+                    .map(Optional::ofNullable)
+                    .toArray(Optional[]::new);
+            list.add(optionals);
+        }
+        Optional<Tile>[][] optionalWall = list.toArray(new Optional[0][]);
 
+        // Now you can use this array with getPoints
+        Points finalPoints = finalPointsCalculation.getPoints(optionalWall);
+
+        // Add the final points to the points object
         points.add(finalPoints);
     }
 

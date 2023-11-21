@@ -1,81 +1,122 @@
 package sk.uniba.fmph.dcs;
 
 import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+class FakePatternLine implements PatternLineInterface {
+    public int capacity;
+    private List<Tile> tiles = new ArrayList<>();
+    private int pointsToReturn = 0; // Default points to return in finishRound
+
+    @Override
+    public void put(List<Tile> tiles) {
+        this.tiles.addAll(tiles);
+    }
+
+    @Override
+    public Points finishRound() {
+        Points points = new Points(pointsToReturn);
+        tiles.clear(); // Assuming the tiles are cleared at the end of the round
+        return points;
+    }
+
+    @Override
+    public String state() {
+        return tiles.toString();
+    }
+
+    // Method to set the points to be returned in finishRound
+    public void setPointsToReturn(int points) {
+        this.pointsToReturn = points;
+    }
+}
+
+class FakeWallLine implements WallLineInterface {
+    private List<Optional<Tile>> tiles = new ArrayList<>();
+
+    @Override
+    public void canPutTile(Tile tile) {
+        // Implement logic if needed, or leave as a no-op
+    }
+
+    @Override
+    public List<Optional<Tile>> getTiles() {
+        return tiles;
+    }
+
+    @Override
+    public Points putTile(Tile tile) {
+        tiles.add(Optional.ofNullable(tile));
+        return new Points(0); // Return 0 points as default, adjust as needed
+    }
+
+    @Override
+    public String state() {
+        return tiles.toString();
+    }}
+
 
 public class BoardTest {
-
     private Board board;
-    private Floor mockFloor;
-    private Points mockPoints;
-    private List<PatternLineInterface> mockPatternLines;
-    private List<WallLineInterface> mockWallLines;
-
+    private Floor fakeFloor;
+    private Points fakePoints;
+    private List<PatternLineInterface> fakePatternLines;
+    private List<WallLineInterface> fakeWallLines;
+    private FakeUsedTiles usedTiles;
     @Before
     public void setUp() {
-        mockFloor = mock(Floor.class);
-        mockPoints = mock(Points.class);
-        mockPatternLines = Arrays.asList(mock(PatternLineInterface.class), mock(PatternLineInterface.class));
-        mockWallLines = Arrays.asList(mock(WallLineInterface.class), mock(WallLineInterface.class));
+        // Initialize the fake objects
+        usedTiles = new FakeUsedTiles();
+        ArrayList<Points> pointPattern = new ArrayList<Points>();
+        pointPattern.add(new Points(1));
+        pointPattern.add(new Points(2));
+        pointPattern.add(new Points(2));
 
-        board = new Board(mockFloor, mockPoints, mockPatternLines, mockWallLines);
+        fakeFloor = new Floor(usedTiles, pointPattern);
+        fakePoints = new Points(5);
+        fakePatternLines = Arrays.asList(new FakePatternLine(), new FakePatternLine());
+        fakeWallLines = Arrays.asList(new FakeWallLine(), new FakeWallLine());
+
+        board = new Board(fakeFloor, fakePoints, fakePatternLines, fakeWallLines);
     }
 
     @Test
-    public void testPutOnFloor() {
-        List<Tile> tiles = Arrays.asList(Tile.BLUE, Tile.YELLOW);
-        board.put(-1, tiles);
-        verify(mockFloor, times(1)).put(tiles);
-    }
-
-    @Test
-    public void testPutOnPatternLine() {
-        List<Tile> tiles = Arrays.asList(Tile.RED);
-        board.put(0, tiles);
-        verify(mockPatternLines.get(0), times(1)).put(tiles);
+    public void testPut() {
+        List<Tile> tiles1 = Arrays.asList(Tile.BLUE, Tile.BLUE);
+        board.put(-1, tiles1);
+        assertEquals("tiles should go to floor", "BB", fakeFloor.state());
+        List<Tile> tiles2 = Arrays.asList(Tile.STARTING_PLAYER);
+        board.put(0, tiles2);
+        assertEquals("should go to floor", "BBS", fakeFloor.state());
+        List<Tile> tiles3 = Arrays.asList(Tile.BLACK, Tile.BLACK);
+        board.put(0, tiles3);
+        assertEquals("BB", fakePatternLines.get(0).state());
     }
 
     @Test
     public void testFinishRound() {
-        // Assume specific behaviors and interactions, then verify them
-        when(mockPatternLines.get(0).finishRound()).thenReturn(10);
-        when(mockFloor.finishRound()).thenReturn(5);
-
-        FinishRoundResult result = board.finishRound();
-
-        verify(mockPoints, times(1)).add(10);
-        verify(mockPoints, times(1)).add(5);
-        // You may need to verify other interactions or check the result
+        assertEquals("normal", board.finishRound().toString());
     }
 
     @Test
     public void testEndGame() {
-        // Similar to testFinishRound, mock behavior and verify interactions
+        board.endGame();
+        
+        // Verify final points calculation, depends on your implementation
     }
 
     @Test
     public void testState() {
-        when(mockPatternLines.get(0).state()).thenReturn("Pattern Line 1 State");
-        when(mockWallLines.get(0).state()).thenReturn("Wall Line 1 State");
-        when(mockFloor.state()).thenReturn("Floor State");
-        when(mockPoints.toString()).thenReturn("Points State");
-
-        String expectedState = "Pattern Lines:\nPattern Line 1 State\n" +
-                "Wall Lines:\nWall Line 1 State\n" +
-                "Floor:\nFloor State\n" +
-                "Points State\n";
-
+        String expectedState = "..."; // Define based on your board's expected state
         assertEquals(expectedState, board.state());
     }
 
-    // Add more tests as needed
 }

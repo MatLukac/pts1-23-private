@@ -1,6 +1,6 @@
 package sk.uniba.fmph.dcs;
 
-public final class Points {
+public class Points {
   public static Points sum(final Iterable<Points> pts) {
 
     int sum = 0;
@@ -13,7 +13,7 @@ public final class Points {
 
   private int value;
 
-  public Points(final int value) {
+  public Points(int value) {
     this.value = value;
   }
 

@@ -8,7 +8,7 @@ public class FinalPointsCalculation {
     private static Color color = new Color();
 
 
-    public static int calculatePoints(Optional<Tile>[][] wall) {
+    public static Points getPoints(Optional<Tile>[][] wall) {
         return vertical.calculate(wall) + horizontal.calculate(wall) + color.calculate(wall);
     }
 }
