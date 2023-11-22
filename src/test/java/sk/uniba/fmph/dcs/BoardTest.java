@@ -2,7 +2,8 @@ package sk.uniba.fmph.dcs;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import sk.uniba.fmph.dcs.interfaces.PatternLineInterface;
+import sk.uniba.fmph.dcs.interfaces.WallLineInterface;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -103,19 +104,38 @@ public class BoardTest {
 
     @Test
     public void testFinishRound() {
-        assertEquals("normal", board.finishRound().toString());
+        List<Tile> tiles1 = Arrays.asList(Tile.BLACK);
+        board.put(0, tiles1);
+        List<Tile> tiles2 = Arrays.asList(Tile.BLACK, Tile.BLACK);
+        board.put(1, tiles2);
+        board.finishRound();
+        assertEquals("Points should be 2", new Points(2), board.getPoints());
+        List<Tile> tiles3 = Arrays.asList(Tile.GREEN);
+        board.put(-1, tiles3);
+        board.finishRound();
+        assertEquals("After adding one tile to floor, points should go down minus 1", new Points(1), board.getPoints());
     }
 
     @Test
     public void testEndGame() {
-        board.endGame();
-        
-        // Verify final points calculation, depends on your implementation
     }
 
     @Test
     public void testState() {
-        String expectedState = "..."; // Define based on your board's expected state
+        List<Tile> tiles1 = Arrays.asList(Tile.RED);
+        List<Tile> tiles2 = Arrays.asList(Tile.YELLOW);
+        board.put(0, tiles1);
+        board.put(1, tiles2);
+        String expectedState = """
+                Pattern Lines:
+                r
+                Y.
+                Wall Lines:
+                ....
+                ....
+                Floor:
+                
+                """;
         assertEquals(expectedState, board.state());
     }
 

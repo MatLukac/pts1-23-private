@@ -1,14 +1,15 @@
 package sk.uniba.fmph.dcs;
 
+import sk.uniba.fmph.dcs.interfaces.PatternLineInterface;
+import sk.uniba.fmph.dcs.interfaces.WallLineInterface;
+
 import java.util.*;
-import java.util.regex.Pattern;
 
 public class Board {
     private final Floor floor;
     private final Points points;
-    private List<PatternLineInterface> patternLines;
-    private List<WallLineInterface> wallLines;
-    private final FinalPointsCalculation finalPointsCalculation = new FinalPointsCalculation();
+    private final List<PatternLineInterface> patternLines;
+    private final List<WallLineInterface> wallLines;
 
     public Board(Floor floor, Points points, List<PatternLineInterface> patternLines, List<WallLineInterface> wallLines) {
 
@@ -50,10 +51,7 @@ public class Board {
             wallTiles[i] = wallLines.get(i).getTiles().toArray(new Optional[0]);
         }
 
-        FinishRoundResult result = GameFinished.gameFinished(wallTiles);
-
-        return result;
-
+        return GameFinished.gameFinished(wallTiles);
     }
 
     public void endGame() {
@@ -73,7 +71,7 @@ public class Board {
         Optional<Tile>[][] optionalWall = list.toArray(new Optional[0][]);
 
         // Now you can use this array with getPoints
-        Points finalPoints = finalPointsCalculation.getPoints(optionalWall);
+        Points finalPoints = FinalPointsCalculation.getPoints(optionalWall);
 
         // Add the final points to the points object
         points.add(finalPoints);
@@ -104,4 +102,7 @@ public class Board {
         return stateBuilder.toString();
     }
 
+    public Points getPoints(){
+        return this.points;
+    }
 }
