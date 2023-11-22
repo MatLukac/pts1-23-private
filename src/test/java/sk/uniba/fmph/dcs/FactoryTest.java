@@ -19,7 +19,7 @@ class FakeBag implements BagInterface {
         tiles.addAll(List.of(Tile.RED, Tile.GREEN, Tile.BLUE,Tile.RED, Tile.GREEN, Tile.BLUE, Tile.GREEN, Tile.BLUE));
     }
     @Override
-    public Collection<Tile> take(int count) {
+    public ArrayList<Tile> take(int count) {
         ArrayList<Tile> toReturn = new ArrayList<>();
         for(int i = 0; i < count; i++) toReturn.add(tiles.get(i));
         return toReturn;

@@ -1,8 +1,8 @@
 package sk.uniba.fmph.dcs;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 public interface BagInterface {
-    Collection<Tile> take(int count);
+    ArrayList<Tile> take(int count);
     String state();
 }
