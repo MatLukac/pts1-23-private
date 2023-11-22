@@ -1,9 +1,6 @@
 package sk.uniba.fmph.dcs;
 
-import sun.tools.jconsole.Tab;
-
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Factory implements TileSource{
     private static final int MAX_NUMBER_OF_TILES = 4;
@@ -18,7 +15,7 @@ public class Factory implements TileSource{
         startNewRound();
     }
     @Override
-    public Collection<Tile> take(int idx) {
+    public ArrayList<Tile> take(int idx) {
         ArrayList<Tile> toReturn = new ArrayList();
         ArrayList<Tile> toTableCenter = new ArrayList<>();
         if (idx < 0 || idx >= tiles.size()) return null;
@@ -27,7 +24,7 @@ public class Factory implements TileSource{
             if(tile.equals(chosenTile)) toReturn.add(tile);
             else toTableCenter.add(tile);
         }
-
+        tiles.removeAll(tiles);
         tableCenter.add(toTableCenter);
         return toReturn;
     }
