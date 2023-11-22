@@ -44,6 +44,10 @@ public class Factory implements TileSource{
 
     @Override
     public String state() {
-        return null;
+        String toReturn = "";
+        for (final Tile tile : tiles) {
+            toReturn += tile.toString();
+        }
+        return toReturn;
     }
 }
