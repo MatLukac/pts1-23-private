@@ -27,7 +27,7 @@ public final class Bag implements BagInterface{
             Collections.shuffle(tiles);
         }
         Random rand = new Random();
-        for(int i = toReturn.size(); i <= count; i++) {
+        for(int i = toReturn.size(); i < count; i++) {
             Tile tile = tiles.get(rand.nextInt(tiles.size()));
             tiles.remove(tile);
             toReturn.add(tile);
