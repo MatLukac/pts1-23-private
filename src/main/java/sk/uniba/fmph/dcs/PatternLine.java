@@ -14,17 +14,14 @@ public class PatternLine implements PatternLineInterface{
         this.wallLine = wallLine;
         this.floor = floor;
         this.usedTiles = usedTiles;
-        tiles = new ArrayList();
+        tiles = new ArrayList(capacity);
 
-        for(Tile tile : List.of(Tile.RED, Tile.BLUE, Tile.BLACK, Tile.GREEN, Tile.YELLOW))
-            for(int i = 0; i < 20; i++)
-                tiles.add(tile);
-        Collections.shuffle(tiles);
     }
 
     @Override
     public void put(Collection<Tile> tiles) {
-        if(!wallLine.canPutTile(tiles.iterator().next())){
+
+        if(!wallLine.canPutTile(tiles.iterator().next()) || (this.tiles.size() != 0 && this.tiles.get(0) != tiles.iterator().next())){
             floor.put(tiles);
             return;
         }
@@ -33,12 +30,12 @@ public class PatternLine implements PatternLineInterface{
             if(this.tiles.size() != capacity) this.tiles.add(tile);
             else fallingTile.add(tile);
         }
-        if(fallingTile.size() != 0) usedTiles.give(fallingTile);
+        if(fallingTile.size() != 0) floor.put(fallingTile);
     }
 
     @Override
     public Points finishRound() {
-        if(tiles.size() != capacity) new Points(0);
+        if(tiles.size() != capacity) return new Points(0);
         Tile tile = tiles.get(0);
         tiles.remove(tile);
         usedTiles.give(tiles);
