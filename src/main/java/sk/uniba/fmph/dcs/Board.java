@@ -1,9 +1,12 @@
 package sk.uniba.fmph.dcs;
 
+import sk.uniba.fmph.dcs.interfaces.FinalPointsCalculationInterface;
+import sk.uniba.fmph.dcs.interfaces.GameFinishedInterface;
 import sk.uniba.fmph.dcs.interfaces.PatternLineInterface;
 import sk.uniba.fmph.dcs.interfaces.WallLineInterface;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Board {
     private final Floor floor;
@@ -30,8 +33,14 @@ public class Board {
 
         if (tiles.contains(Tile.STARTING_PLAYER)) {
 
-            tiles.remove(Tile.STARTING_PLAYER);
             floor.put(Collections.singleton(Tile.STARTING_PLAYER));
+            List<Tile> help = new ArrayList<>();
+            for (Tile tile : tiles){
+                if (tile != Tile.STARTING_PLAYER){
+                    help.add(tile);
+                }
+            }
+            tiles = help;
         }
 
         patternLines.get(destinationIndex).put(tiles);
@@ -46,32 +55,22 @@ public class Board {
 
         points.add(floor.finishRound());
 
-        Optional<Tile>[][] wallTiles = new Optional[wallLines.size()][];
-        for (int i = 0; i < wallLines.size(); i++) {
-            wallTiles[i] = wallLines.get(i).getTiles().toArray(new Optional[0]);
-        }
+        List<List<Optional<Tile>>> wallTiles = wallLines.stream()
+                .map(WallLineInterface::getTiles) // Convert each WallLineInterface to List<Optional<Tile>>
+                .collect(Collectors.toList());
 
-        return GameFinished.gameFinished(wallTiles);
+        FinishRoundResult result = GameFinishedInterface.gameFinished(wallTiles);
+        if (result == FinishRoundResult.GAME_FINISHED) endGame();
+        return result;
     }
 
     public void endGame() {
 
-        Tile[][] wallTiles = wallLines.stream()
-                .map(WallLineInterface::getTiles)
-                .toArray(Tile[][]::new);
+        List<List<Optional<Tile>>> wallTiles = wallLines.stream()
+                .map(WallLineInterface::getTiles) // Convert each WallLineInterface to List<Optional<Tile>>
+                .collect(Collectors.toList());
 
-        // Convert it into an Optional<Tile>[][] array
-        List<Optional[]> list = new ArrayList<>();
-        for (Tile[] row : wallTiles) {
-            Optional[] optionals = Arrays.stream(row)
-                    .map(Optional::ofNullable)
-                    .toArray(Optional[]::new);
-            list.add(optionals);
-        }
-        Optional<Tile>[][] optionalWall = list.toArray(new Optional[0][]);
-
-        // Now you can use this array with getPoints
-        Points finalPoints = FinalPointsCalculation.getPoints(optionalWall);
+        Points finalPoints = FinalPointsCalculationInterface.getPoints(wallTiles);
 
         // Add the final points to the points object
         points.add(finalPoints);

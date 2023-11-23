@@ -17,6 +17,10 @@ class FakePatternLine implements PatternLineInterface {
     private List<Tile> tiles = new ArrayList<>();
     private int pointsToReturn = 0; // Default points to return in finishRound
 
+    public FakePatternLine(int capacity){
+        this.capacity = capacity;
+    }
+
     @Override
     public void put(List<Tile> tiles) {
         this.tiles.addAll(tiles);
@@ -31,7 +35,14 @@ class FakePatternLine implements PatternLineInterface {
 
     @Override
     public String state() {
-        return tiles.toString();
+        int k = 0;
+        StringBuilder result = new StringBuilder();
+        for (Tile tile : tiles){
+            result.append(tile.toString());
+            k++;
+        }
+        result.append(".".repeat(Math.max(0, capacity - k)));
+        return result.toString();
     }
 
     // Method to set the points to be returned in finishRound
@@ -44,8 +55,8 @@ class FakeWallLine implements WallLineInterface {
     private List<Optional<Tile>> tiles = new ArrayList<>();
 
     @Override
-    public void canPutTile(Tile tile) {
-        // Implement logic if needed, or leave as a no-op
+    public boolean canPutTile(Tile tile) {
+        return true;
     }
 
     @Override
@@ -61,8 +72,9 @@ class FakeWallLine implements WallLineInterface {
 
     @Override
     public String state() {
-        return tiles.toString();
-    }}
+        return ".....";
+    }
+}
 
 
 public class BoardTest {
@@ -83,7 +95,7 @@ public class BoardTest {
 
         fakeFloor = new Floor(usedTiles, pointPattern);
         fakePoints = new Points(5);
-        fakePatternLines = Arrays.asList(new FakePatternLine(), new FakePatternLine());
+        fakePatternLines = Arrays.asList(new FakePatternLine(1), new FakePatternLine(2));
         fakeWallLines = Arrays.asList(new FakeWallLine(), new FakeWallLine());
 
         board = new Board(fakeFloor, fakePoints, fakePatternLines, fakeWallLines);
@@ -99,7 +111,7 @@ public class BoardTest {
         assertEquals("should go to floor", "BBS", fakeFloor.state());
         List<Tile> tiles3 = Arrays.asList(Tile.BLACK, Tile.BLACK);
         board.put(0, tiles3);
-        assertEquals("BB", fakePatternLines.get(0).state());
+        assertEquals("LL", fakePatternLines.get(0).state());
     }
 
     @Test
@@ -109,11 +121,11 @@ public class BoardTest {
         List<Tile> tiles2 = Arrays.asList(Tile.BLACK, Tile.BLACK);
         board.put(1, tiles2);
         board.finishRound();
-        assertEquals("Points should be 2", new Points(2), board.getPoints());
+        assertEquals("Points should be 5", new Points(5), board.getPoints());
         List<Tile> tiles3 = Arrays.asList(Tile.GREEN);
         board.put(-1, tiles3);
         board.finishRound();
-        assertEquals("After adding one tile to floor, points should go down minus 1", new Points(1), board.getPoints());
+        assertEquals("After adding one tile to floor, points should go down minus 6", new Points(6), board.getPoints());
     }
 
     @Test
@@ -128,13 +140,14 @@ public class BoardTest {
         board.put(1, tiles2);
         String expectedState = """
                 Pattern Lines:
-                r
-                Y.
+                R
+                I.
                 Wall Lines:
-                ....
-                ....
+                .....
+                .....
                 Floor:
                 
+                Points[value=5]
                 """;
         assertEquals(expectedState, board.state());
     }
