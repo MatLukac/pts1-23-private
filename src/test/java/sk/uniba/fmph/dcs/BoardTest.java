@@ -67,7 +67,7 @@ class FakeWallLine implements WallLineInterface {
     @Override
     public Points putTile(Tile tile) {
         tiles.add(Optional.ofNullable(tile));
-        return new Points(0); // Return 0 points as default, adjust as needed
+        return new Points(0); // Return 0 points as default
     }
 
     @Override
@@ -83,11 +83,11 @@ public class BoardTest {
     private Points fakePoints;
     private List<PatternLineInterface> fakePatternLines;
     private List<WallLineInterface> fakeWallLines;
-    private FakeUsedTiles usedTiles;
+
     @Before
     public void setUp() {
         // Initialize the fake objects
-        usedTiles = new FakeUsedTiles();
+        FakeUsedTiles usedTiles = new FakeUsedTiles();
         ArrayList<Points> pointPattern = new ArrayList<Points>();
         pointPattern.add(new Points(1));
         pointPattern.add(new Points(2));
