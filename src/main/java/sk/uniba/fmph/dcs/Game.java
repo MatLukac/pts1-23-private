@@ -5,16 +5,17 @@ import java.util.ArrayList;
 public class Game implements GameInterface{
     private final BagInterface bag;
     private final TableAreaInterface tableArea;
-    private final ObserverInterface gameObserver;
+    private final GameObserverInterface gameObserver;
     private final ArrayList<BoardInterface> boards;
     private int playerId;
 
-    public Game(BagInterface bag, TableAreaInterface tableArea, ObserverInterface gameObserver, ArrayList<BoardInterface> board){
+    public Game(BagInterface bag, TableAreaInterface tableArea, GameObserverInterface gameObserver, ArrayList<BoardInterface> board){
         this.bag = bag;
         this.tableArea = tableArea;
         this.gameObserver = gameObserver;
         this.boards = board;
         playerId = 0;
+        gameObserver.notifyEverybody("Game started.");
     }
 
     @Override
@@ -31,8 +32,12 @@ public class Game implements GameInterface{
 
         if(f == FinishRoundResult.GAME_FINISHED) {
             for(BoardInterface board : boards) board.endGame();
+            gameObserver.notifyEverybody("Game ended;");
         }
-        else tableArea.startNewRound();
+        else {
+            gameObserver.notifyEverybody("New round started.");
+            tableArea.startNewRound();
+        }
 
         return true;
     }
