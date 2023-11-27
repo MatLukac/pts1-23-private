@@ -5,9 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="149701b4-3871-48b1-9ff3-9b9a7ff3faad" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/interfaces/GameFinishedInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/BagInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/BagInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/FactoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/FactoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interfaces/TileSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/TileSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interfaces/UsedTileTakeInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interfaces/WallLineInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/WallLineInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Bag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Bag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/BagInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Calculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/Calculation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Color.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/FinalPointsCalculationInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/FinalPointsCalculationInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/GameFinished.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/GameFinished.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/GameObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/GameObserver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Horizontal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Horizontal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/ObserverInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/ObserverInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/PatternLineInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/TableArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/TableArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/TableCenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/TableCenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/TileSource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/UsedTiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/UsedTiles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/UsedTilesTakeInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/UsedTilesTakeInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Vertical.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Vertical.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/WallLineInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/BagTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/BagTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/BoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/BoardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/PatternLineTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/PatternLineTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/TableAreaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/TableAreaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/TableCenterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/TableCenterTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,13 +43,16 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -39,7 +68,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.TableAreaTest.test_tableArea">
     <configuration name="FactoryTest.test_factory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AZUL" />
       <extension name="coverage">
@@ -56,9 +85,74 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TableAreaTest.test_tableArea" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AZUL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sk.uniba.fmph.dcs.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="sk.uniba.fmph.dcs" />
+      <option name="MAIN_CLASS_NAME" value="sk.uniba.fmph.dcs.TableAreaTest" />
+      <option name="METHOD_NAME" value="test_tableArea" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TableCenterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AZUL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sk.uniba.fmph.dcs.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="sk.uniba.fmph.dcs" />
+      <option name="MAIN_CLASS_NAME" value="sk.uniba.fmph.dcs.TableCenterTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UsedTilesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AZUL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sk.uniba.fmph.dcs.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="sk.uniba.fmph.dcs" />
+      <option name="MAIN_CLASS_NAME" value="sk.uniba.fmph.dcs.UsedTilesTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WallLineTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AZUL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sk.uniba.fmph.dcs.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="sk.uniba.fmph.dcs" />
+      <option name="MAIN_CLASS_NAME" value="sk.uniba.fmph.dcs.WallLineTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TableAreaTest.test_tableArea" />
         <item itemvalue="JUnit.FactoryTest.test_factory" />
+        <item itemvalue="JUnit.WallLineTest" />
+        <item itemvalue="JUnit.UsedTilesTest" />
+        <item itemvalue="JUnit.TableCenterTest" />
       </list>
     </recent_temporary>
   </component>

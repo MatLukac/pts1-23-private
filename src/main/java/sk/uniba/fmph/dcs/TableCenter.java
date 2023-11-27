@@ -1,8 +1,10 @@
 package sk.uniba.fmph.dcs;
 
+import interfaces.TileSource;
+
 import java.util.ArrayList;
 
-public class TableCenter implements TileSource{
+public class TableCenter implements TileSource {
     private ArrayList<Tile> tiles;
     private boolean isFirst;
 
@@ -44,7 +46,7 @@ public class TableCenter implements TileSource{
     }
 
     @Override
-    public String State() {
+    public String state() {
         String toReturn = "";
         for (final Tile tile : tiles) {
             toReturn += tile.toString();

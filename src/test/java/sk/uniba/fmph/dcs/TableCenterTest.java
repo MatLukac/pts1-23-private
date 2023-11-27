@@ -12,13 +12,13 @@ public class TableCenterTest {
     public void test_tableCenter() {
         TableCenter tableCenter = new TableCenter();
         tableCenter.startNewRound();
-        assertEquals("TablaCenter Should have 1 Starting Player Tile.", "S", tableCenter.State());
+        assertEquals("TablaCenter Should have 1 Starting Player Tile.", "S", tableCenter.state());
         ArrayList<Tile> tiles = new ArrayList<Tile>();
         tiles.add(Tile.RED);
         tiles.add(Tile.GREEN);
         tiles.add(Tile.RED);
         tableCenter.add(tiles);
-        assertEquals("Center should contain tiles we put on it.", "SRGR", tableCenter.State());
+        assertEquals("Center should contain tiles we put on it.", "SRGR", tableCenter.state());
         assertEquals("Center should take two red tiles.", new ArrayList<Tile>(List.of(Tile.STARTING_PLAYER, Tile.RED, Tile.RED)), tableCenter.take(1));
     }
 }

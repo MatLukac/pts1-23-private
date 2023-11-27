@@ -1,5 +1,7 @@
 package sk.uniba.fmph.dcs;
 
+import interfaces.Calculation;
+
 import java.util.List;
 import java.util.Optional;
 

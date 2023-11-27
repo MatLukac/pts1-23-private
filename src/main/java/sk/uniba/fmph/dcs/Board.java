@@ -1,9 +1,11 @@
 package sk.uniba.fmph.dcs;
 
-import sk.uniba.fmph.dcs.interfaces.FinalPointsCalculationInterface;
-import sk.uniba.fmph.dcs.interfaces.GameFinishedInterface;
-import sk.uniba.fmph.dcs.interfaces.PatternLineInterface;
-import sk.uniba.fmph.dcs.interfaces.WallLineInterface;
+import interfaces.FinalPointsCalculationInterface;
+import interfaces.WallLineInterface;
+import interfaces.FinalPointsCalculationInterface;
+import interfaces.GameFinishedInterface;
+import interfaces.PatternLineInterface;
+import interfaces.WallLineInterface;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -1,5 +1,7 @@
 package sk.uniba.fmph.dcs;
 
+import interfaces.ObserverInterface;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,7 +1,10 @@
 package sk.uniba.fmph.dcs;
+import interfaces.UsedTilesGiveInterface;
+import interfaces.UsedTilesTakeInterface;
+
 import java.util.*;
 
-public final class UsedTiles implements UsedTilesGiveInterface, UsedTilesTakeInterface{
+public final class UsedTiles implements UsedTilesGiveInterface, UsedTilesTakeInterface {
     private ArrayList<Tile> tiles;
     public UsedTiles(){
         tiles = new ArrayList<>();

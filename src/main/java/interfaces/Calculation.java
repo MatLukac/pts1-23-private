@@ -1,4 +1,6 @@
-package sk.uniba.fmph.dcs;
+package interfaces;
+
+import sk.uniba.fmph.dcs.Tile;
 
 import java.util.List;
 import java.util.Optional;

@@ -6,11 +6,11 @@ import static org.junit.Assert.assertEquals;
 import java.util.*;
 import java.util.List;
 
-import interfaces.UsedTileTakeInterface;
+import interfaces.UsedTilesTakeInterface;
 import org.junit.Before;
 import org.junit.Test;
 
-class FakeUsedTilesBag implements UsedTileTakeInterface {
+class FakeUsedTilesBag implements UsedTilesTakeInterface {
     public ArrayList<Tile> tiles;
     public FakeUsedTilesBag() {tiles = new ArrayList();}
     @Override

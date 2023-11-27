@@ -1,14 +1,12 @@
 package sk.uniba.fmph.dcs;
 
+import interfaces.WallLineInterface;
 import org.junit.Before;
 import org.junit.Test;
-import sk.uniba.fmph.dcs.interfaces.PatternLineInterface;
-import sk.uniba.fmph.dcs.interfaces.WallLineInterface;
+import interfaces.PatternLineInterface;
+import interfaces.WallLineInterface;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -22,7 +20,7 @@ class FakePatternLine implements PatternLineInterface {
     }
 
     @Override
-    public void put(List<Tile> tiles) {
+    public void put(Collection<Tile> tiles) {
         this.tiles.addAll(tiles);
     }
 

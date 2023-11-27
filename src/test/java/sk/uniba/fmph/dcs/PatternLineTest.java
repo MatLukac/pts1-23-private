@@ -19,9 +19,9 @@ class FakeFloor implements FloorPutInterface {
     }
 }
 
-class FakeWallLine implements WallLineInterface {
+class FakeWallLinePatternLine implements WallLineInterface {
     public ArrayList<Optional<Tile>> tiles;
-    public FakeWallLine() {tiles = new ArrayList<>();}
+    public FakeWallLinePatternLine() {tiles = new ArrayList<>();}
 
     @Override
     public boolean canPutTile(Tile tile) {

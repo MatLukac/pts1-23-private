@@ -1,16 +1,16 @@
 package sk.uniba.fmph.dcs;
 
 import interfaces.BagInterface;
-import interfaces.UsedTileTakeInterface;
+import interfaces.UsedTilesTakeInterface;
 
 import java.util.ArrayList;
 import java.util.*;
 
 public final class Bag implements BagInterface {
     private ArrayList<Tile> tiles;
-    private final UsedTileTakeInterface usedTiles;
+    private final UsedTilesTakeInterface usedTiles;
 
-    public Bag(final UsedTileTakeInterface usedTiles) {
+    public Bag(final UsedTilesTakeInterface usedTiles) {
         tiles = new ArrayList<>();
         this.usedTiles = usedTiles;
 
