@@ -6,7 +6,7 @@ import interfaces.TileSource;
 
 import java.util.ArrayList;
 
-public class Factory implements TileSource {
+public final class Factory implements TileSource {
     private static final int MAX_NUMBER_OF_TILES = 4;
     private final BagInterface bag;
     private final TableCenterAddInterface tableCenter;

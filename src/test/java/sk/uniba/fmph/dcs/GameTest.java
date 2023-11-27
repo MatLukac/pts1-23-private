@@ -12,10 +12,10 @@ import interfaces.TableAreaInterface;
 import org.junit.Before;
 import org.junit.Test;
 
-class FakeBag implements BagInterface {
+class FakeBagGame implements BagInterface {
     private ArrayList<Tile> tiles;
 
-    public FakeBag() {
+    public FakeBagGame() {
         tiles = new ArrayList<>();
         tiles.addAll(List.of(Tile.RED, Tile.GREEN, Tile.BLUE,Tile.RED, Tile.GREEN, Tile.BLUE, Tile.GREEN, Tile.BLUE));
     }
@@ -111,14 +111,14 @@ class FakeGameObserver implements GameObserverInterface {
 }
 
 public class GameTest {
-    private FakeBag bag;
+    private FakeBagGame bag;
     private ArrayList<BoardInterface> boards;
     private FakeTableArea tableArea;
     private FakeGameObserver gameObserver;
     private Game game;
     @Before
     public void setUp(){
-        bag = new FakeBag();
+        bag = new FakeBagGame();
         boards = new ArrayList<>(List.of(new FakeBoard(), new FakeBoard()));
         tableArea = new FakeTableArea();
         gameObserver = new FakeGameObserver();

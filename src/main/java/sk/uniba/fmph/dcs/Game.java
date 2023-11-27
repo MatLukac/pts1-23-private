@@ -4,7 +4,7 @@ import interfaces.*;
 
 import java.util.ArrayList;
 
-public class Game implements GameInterface {
+public final class Game implements GameInterface {
     private final BagInterface bag;
     private final TableAreaInterface tableArea;
     private final GameObserverInterface gameObserver;

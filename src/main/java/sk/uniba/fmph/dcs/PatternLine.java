@@ -7,7 +7,7 @@ import interfaces.WallLineInterface;
 
 import java.util.*;
 
-public class PatternLine implements PatternLineInterface {
+public final class PatternLine implements PatternLineInterface {
     private final int capacity;
     private final WallLineInterface wallLine;
     private final FloorPutInterface floor;

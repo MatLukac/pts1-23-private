@@ -1,6 +1,6 @@
 package sk.uniba.fmph.dcs;
 
-enum FinishRoundResult {
+public enum FinishRoundResult {
     NORMAL,
     GAME_FINISHED;
 
