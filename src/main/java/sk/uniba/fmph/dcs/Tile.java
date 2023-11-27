@@ -1,6 +1,6 @@
 package sk.uniba.fmph.dcs;
 
-enum Tile {
+public enum Tile {
   STARTING_PLAYER,
   RED,
   GREEN,

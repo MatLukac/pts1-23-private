@@ -1,8 +1,12 @@
 package sk.uniba.fmph.dcs;
 
+import interfaces.BagInterface;
+import interfaces.TableCenterAddInterface;
+import interfaces.TileSource;
+
 import java.util.ArrayList;
 
-public class Factory implements TileSource{
+public class Factory implements TileSource {
     private static final int MAX_NUMBER_OF_TILES = 4;
     private final BagInterface bag;
     private final TableCenterAddInterface tableCenter;

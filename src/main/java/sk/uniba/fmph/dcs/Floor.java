@@ -1,9 +1,12 @@
 package sk.uniba.fmph.dcs;
 
+import interfaces.FloorPutInterface;
+import interfaces.UsedTilesGiveInterface;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
-public final class Floor implements FloorPutInterface{
+public final class Floor implements FloorPutInterface {
   private final UsedTilesGiveInterface usedTiles;
   private final ArrayList<Points> pointPattern;
   private ArrayList<Tile> tiles;

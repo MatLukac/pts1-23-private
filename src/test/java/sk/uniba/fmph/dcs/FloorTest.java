@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+import interfaces.UsedTilesGiveInterface;
 import org.junit.Before;
 import org.junit.Test;
 

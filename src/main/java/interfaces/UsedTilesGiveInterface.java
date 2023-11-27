@@ -4,6 +4,6 @@ import sk.uniba.fmph.dcs.Tile;
 
 import java.util.Collection;
 
-interface UsedTilesGiveInterface {
+public interface UsedTilesGiveInterface {
   void give(Collection<Tile> ts);
 }

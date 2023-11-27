@@ -1,8 +1,13 @@
 package sk.uniba.fmph.dcs;
 
+import interfaces.FloorPutInterface;
+import interfaces.PatternLineInterface;
+import interfaces.UsedTilesGiveInterface;
+import interfaces.WallLineInterface;
+
 import java.util.*;
 
-public class PatternLine implements PatternLineInterface{
+public class PatternLine implements PatternLineInterface {
     private final int capacity;
     private final WallLineInterface wallLine;
     private final FloorPutInterface floor;
