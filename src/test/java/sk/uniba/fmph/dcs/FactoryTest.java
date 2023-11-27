@@ -4,10 +4,11 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import interfaces.BagInterface;
+import interfaces.TableCenterAddInterface;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,7 +31,7 @@ class FakeBag implements BagInterface {
     }
 }
 
-class FakeTableCenter implements TableCenterAddInterface{
+class FakeTableCenter implements TableCenterAddInterface {
     public ArrayList<Tile> tiles = new ArrayList<>();
 
     @Override

@@ -1,4 +1,4 @@
-package sk.uniba.fmph.dcs;
+package interfaces;
 
 public interface GameObserverInterface {
     void notifyEverybody(String state);

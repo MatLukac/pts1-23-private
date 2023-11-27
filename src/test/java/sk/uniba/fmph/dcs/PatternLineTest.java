@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.*;
 
+import interfaces.FloorPutInterface;
+import interfaces.WallLineInterface;
 import org.junit.Before;
 import org.junit.Test;
 

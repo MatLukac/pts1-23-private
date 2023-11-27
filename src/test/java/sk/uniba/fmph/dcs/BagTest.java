@@ -3,10 +3,10 @@ package sk.uniba.fmph.dcs;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
+import interfaces.UsedTileTakeInterface;
 import org.junit.Before;
 import org.junit.Test;
 

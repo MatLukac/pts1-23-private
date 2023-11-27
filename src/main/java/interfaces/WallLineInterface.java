@@ -1,4 +1,7 @@
-package sk.uniba.fmph.dcs;
+package interfaces;
+import sk.uniba.fmph.dcs.Points;
+import sk.uniba.fmph.dcs.Tile;
+
 import java.util.*;
 public interface WallLineInterface {
     boolean canPutTile(Tile tile);

@@ -5,6 +5,10 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import interfaces.BagInterface;
+import interfaces.BoardInterface;
+import interfaces.GameObserverInterface;
+import interfaces.TableAreaInterface;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,7 +31,7 @@ class FakeBag implements BagInterface {
     }
 }
 
-class FakeBoard implements BoardInterface{
+class FakeBoard implements BoardInterface {
     //very simplify version of the correct Board class, put automatically puts tile on WallLine
     public ArrayList<ArrayList<Boolean>> tiles;
     public FakeBoard(){
@@ -63,7 +67,7 @@ class FakeBoard implements BoardInterface{
     }
 }
 
-class FakeTableArea implements TableAreaInterface{
+class FakeTableArea implements TableAreaInterface {
     ArrayList<List<Tile>> tiles;
     public FakeTableArea(){
         tiles = new ArrayList();
@@ -99,7 +103,7 @@ class FakeTableArea implements TableAreaInterface{
     }
 }
 
-class FakeGameObserver implements GameObserverInterface{
+class FakeGameObserver implements GameObserverInterface {
     @Override
     public void notifyEverybody(String state) {
         System.out.println(state);
