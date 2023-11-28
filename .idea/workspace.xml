@@ -5,35 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="149701b4-3871-48b1-9ff3-9b9a7ff3faad" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/interfaces/GameFinishedInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interfaces/TileSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/TileSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interfaces/UsedTileTakeInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interfaces/WallLineInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/WallLineInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Bag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Bag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/BagInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Calculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/Calculation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Color.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/FinalPointsCalculationInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/FinalPointsCalculationInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/GameFinished.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/GameFinished.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/GameObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/GameObserver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Horizontal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Horizontal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/ObserverInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/ObserverInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/PatternLineInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/TableArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/TableArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/TableCenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/TableCenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/TileSource.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/UsedTiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/UsedTiles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/UsedTilesTakeInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/UsedTilesTakeInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interfaces/FloorPutInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/FloorPutInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/PatternLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/PatternLine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Vertical.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Vertical.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/WallLineInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/BagTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/BagTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/BoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/BoardTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/PatternLineTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/PatternLineTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/TableAreaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/TableAreaTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/TableCenterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/TableCenterTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

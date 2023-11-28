@@ -5,14 +5,14 @@ import interfaces.Calculation;
 import java.util.List;
 import java.util.Optional;
 
-public class Vertical implements Calculation {
+public final class Vertical implements Calculation {
 
 
-    public int calculatePoints(List<List<Optional<Tile>>> wall) {
+    public int calculatePoints(final List<List<Optional<Tile>>> wall) {
         return calculate(wall);
     }
     @Override
-    public int calculate(List<List<Optional<Tile>>> wall) {
+    public int calculate(final List<List<Optional<Tile>>> wall) {
         int totalPoints = 0;
         for (int col = 0; col < wall.size(); col++) {
             if (isColumnComplete(wall, col)) {
@@ -22,7 +22,7 @@ public class Vertical implements Calculation {
         return totalPoints;
     }
 
-    public boolean isColumnComplete(List<List<Optional<Tile>>> wall, int colIndex) {
+    public boolean isColumnComplete(final List<List<Optional<Tile>>> wall, final int colIndex) {
         for (List<Optional<Tile>> row : wall) {
             if (!row.get(colIndex).isPresent()) {
                 return false;
