@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 class GameFinished implements GameFinishedInterface {
+    protected GameFinished() {
+    }
 
     public static FinishRoundResult gameFinished(final List<List<Optional<Tile>>> wall) {
         Horizontal horizontal = new Horizontal();

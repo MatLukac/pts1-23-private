@@ -5,15 +5,15 @@ import interfaces.TileSource;
 
 import java.util.ArrayList;
 
-public class TableArea implements TableAreaInterface {
-    ArrayList<TileSource> tileSources;
+public final class TableArea implements TableAreaInterface {
+    private ArrayList<TileSource> tileSources;
 
-    public TableArea(ArrayList<TileSource> tileSources) {
+    public TableArea(final ArrayList<TileSource> tileSources) {
         this.tileSources = tileSources;
     }
 
     @Override
-    public ArrayList<Tile> take(int sourceIdx, int idx) {
+    public ArrayList<Tile> take(final int sourceIdx, final int idx) {
         return tileSources.get(sourceIdx).take(idx);
     }
 

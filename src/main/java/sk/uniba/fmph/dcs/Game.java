@@ -1,6 +1,10 @@
 package sk.uniba.fmph.dcs;
 
-import interfaces.*;
+import interfaces.BagInterface;
+import interfaces.BoardInterface;
+import interfaces.GameInterface;
+import interfaces.GameObserverInterface;
+import interfaces.TableAreaInterface;
 
 import java.util.ArrayList;
 
@@ -70,9 +74,11 @@ public final class Game implements GameInterface {
     public int getCurrentPlayerId() {
         return playerId;
     }
+
     public int getNextStartingPlayer() {
         return nextStartingPlayer;
     }
+
     public String state() {
         return gameState;
     }

@@ -15,7 +15,7 @@ class FakePatternLine implements PatternLineInterface {
     private List<Tile> tiles = new ArrayList<>();
     private int pointsToReturn = 0; // Default points to return in finishRound
 
-    public FakePatternLine(int capacity){
+    public FakePatternLine(int capacity) {
         this.capacity = capacity;
     }
 
@@ -35,7 +35,7 @@ class FakePatternLine implements PatternLineInterface {
     public String state() {
         int k = 0;
         StringBuilder result = new StringBuilder();
-        for (Tile tile : tiles){
+        for (Tile tile : tiles) {
             result.append(tile.toString());
             k++;
         }
@@ -104,7 +104,7 @@ public class BoardTest {
         List<Tile> tiles1 = Arrays.asList(Tile.BLUE, Tile.BLUE);
         board.put(-1, tiles1);
         assertEquals("tiles should go to floor", "BB", fakeFloor.state());
-        List<Tile> tiles2 = Arrays.asList(Tile.STARTING_PLAYER);
+        List<Tile> tiles2 = List.of(Tile.STARTING_PLAYER);
         board.put(0, tiles2);
         assertEquals("should go to floor", "BBS", fakeFloor.state());
         List<Tile> tiles3 = Arrays.asList(Tile.BLACK, Tile.BLACK);
@@ -144,7 +144,7 @@ public class BoardTest {
                 .....
                 .....
                 Floor:
-                
+                                
                 Points[value=5]
                 """;
         assertEquals(expectedState, board.state());

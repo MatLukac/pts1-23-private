@@ -12,21 +12,27 @@ public final class Factory implements TileSource {
     private final TableCenterAddInterface tableCenter;
     private ArrayList<Tile> tiles;
 
-    public Factory(BagInterface bag, TableCenterAddInterface tableCenter){
+    public Factory(final BagInterface bag, final TableCenterAddInterface tableCenter) {
         this.bag = bag;
         this.tableCenter = tableCenter;
         tiles = new ArrayList<>();
         startNewRound();
     }
+
     @Override
-    public ArrayList<Tile> take(int idx) {
+    public ArrayList<Tile> take(final int idx) {
         ArrayList<Tile> toReturn = new ArrayList();
         ArrayList<Tile> toTableCenter = new ArrayList<>();
-        if (idx < 0 || idx >= tiles.size()) return null;
+        if (idx < 0 || idx >= tiles.size()) {
+            return null;
+        }
         Tile chosenTile = tiles.get(idx);
-        for(Tile tile : tiles) {
-            if(tile.equals(chosenTile)) toReturn.add(tile);
-            else toTableCenter.add(tile);
+        for (Tile tile : tiles) {
+            if (!tile.equals(chosenTile)) {
+                toTableCenter.add(tile);
+            } else {
+                toReturn.add(tile);
+            }
         }
         tiles.removeAll(tiles);
         tableCenter.add(toTableCenter);

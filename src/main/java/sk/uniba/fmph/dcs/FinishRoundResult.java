@@ -6,8 +6,8 @@ public enum FinishRoundResult {
 
     @Override
     public String toString() {
-        switch(this) {
-            case NORMAL :
+        switch (this) {
+            case NORMAL:
                 return "normal";
             case GAME_FINISHED:
                 return "game_finished";

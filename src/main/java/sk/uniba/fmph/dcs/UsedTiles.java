@@ -1,20 +1,25 @@
 package sk.uniba.fmph.dcs;
+
 import interfaces.UsedTilesGiveInterface;
 import interfaces.UsedTilesTakeInterface;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public final class UsedTiles implements UsedTilesGiveInterface, UsedTilesTakeInterface {
     private ArrayList<Tile> tiles;
-    public UsedTiles(){
+
+    public UsedTiles() {
         tiles = new ArrayList<>();
     }
 
     @Override
 
-    public void give(Collection<Tile> newTiles) {
-        for(Tile tile : newTiles) {
-            if (tile != Tile.STARTING_PLAYER) tiles.add(tile);
+    public void give(final Collection<Tile> newTiles) {
+        for (Tile tile : newTiles) {
+            if (tile != Tile.STARTING_PLAYER) {
+                tiles.add(tile);
+            }
         }
     }
 

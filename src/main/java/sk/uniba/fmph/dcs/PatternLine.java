@@ -25,7 +25,7 @@ public final class PatternLine implements PatternLineInterface {
     }
 
     @Override
-    public void put(Collection<Tile> tiles) {
+    public void put(final Collection<Tile> tiles) {
 
         if (!wallLine.canPutTile(tiles.iterator().next()) || (this.tiles.size() != 0 && this.tiles.get(0) != tiles.iterator().next())) {
             floor.put(tiles);
@@ -35,8 +35,7 @@ public final class PatternLine implements PatternLineInterface {
         for (Tile tile : tiles) {
             if (this.tiles.size() != capacity) {
                 this.tiles.add(tile);
-            }
-            else {
+            } else {
                 fallingTile.add(tile);
             }
         }

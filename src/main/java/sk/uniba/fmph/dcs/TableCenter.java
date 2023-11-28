@@ -4,7 +4,7 @@ import interfaces.TileSource;
 
 import java.util.ArrayList;
 
-public class TableCenter implements TileSource {
+public final class TableCenter implements TileSource {
     private ArrayList<Tile> tiles;
     private boolean isFirst;
 
@@ -13,16 +13,20 @@ public class TableCenter implements TileSource {
         isFirst = true;
     }
 
-    public void add(ArrayList<Tile> tiles) {
+    public void add(final ArrayList<Tile> tiles) {
         this.tiles.addAll(tiles);
     }
 
     @Override
-    public ArrayList<Tile> take(int idx) {
-        if(idx > tiles.size()) throw new IndexOutOfBoundsException("Index out of bounds");
+    public ArrayList<Tile> take(final int idx) {
+        if (idx > tiles.size()) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
         Tile pickedTile = tiles.get(idx);
         ArrayList<Tile> pickedTiles = new ArrayList<Tile>();
-        if(isFirst) pickedTiles.add(tiles.remove(0));
+        if (isFirst) {
+            pickedTiles.add(tiles.remove(0));
+        }
         isFirst = false;
         for (int i = 0; i < tiles.size(); i++) {
             if (tiles.get(i) == pickedTile) {
