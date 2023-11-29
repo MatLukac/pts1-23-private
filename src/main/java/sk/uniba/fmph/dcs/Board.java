@@ -15,13 +15,13 @@ import java.util.stream.Collectors;
 public final class Board implements BoardInterface {
     private final Floor floor;
     private final ArrayList<Points> points;
-    private final List<PatternLineInterface> patternLines;
-    private final List<WallLineInterface> wallLines;
+    private final ArrayList<PatternLineInterface> patternLines;
+    private final ArrayList<WallLineInterface> wallLines;
     private final FinalPointsCalculationInterface finalPointsCalculation;
     private final GameFinishedInterface gameFinished;
 
 
-    public Board(final Floor floor, final ArrayList<Points> points, final List<PatternLineInterface> patternLines, final ArrayList<WallLineInterface> wallLines, final FinalPointsCalculationInterface finalPointsCalculation, final GameFinishedInterface gameFinished) {
+    public Board(final Floor floor, final ArrayList<Points> points, final ArrayList<PatternLineInterface> patternLines, final ArrayList<WallLineInterface> wallLines, final FinalPointsCalculationInterface finalPointsCalculation, final GameFinishedInterface gameFinished) {
         this.finalPointsCalculation = finalPointsCalculation;
         this.gameFinished = gameFinished;
         this.floor = floor;

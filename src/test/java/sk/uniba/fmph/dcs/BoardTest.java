@@ -94,7 +94,7 @@ public class BoardTest {
     private Board board;
     private Floor fakeFloor;
     private ArrayList<Points> fakePoints;
-    private List<PatternLineInterface> fakePatternLines;
+    private ArrayList<PatternLineInterface> fakePatternLines;
     private ArrayList<WallLineInterface> fakeWallLines;
 
     private FakeFinalPointsCal finalPointsCalculation;
@@ -109,8 +109,8 @@ public class BoardTest {
         pointPattern.add(new Points(-2));
 
         fakeFloor = new Floor(usedTiles, pointPattern);
-        fakePoints = new ArrayList<>(Arrays.asList(new Points(5)));
-        fakePatternLines = Arrays.asList(new FakePatternLine(1), new FakePatternLine(2));
+        fakePoints = new ArrayList(List.of(new Points(5)));
+        fakePatternLines = new ArrayList(List.of(new FakePatternLine(1), new FakePatternLine(2)));
         fakeWallLines = new ArrayList<>(List.of(new FakeWallLine(), new FakeWallLine()));
 
         finalPointsCalculation = new FakeFinalPointsCal();
