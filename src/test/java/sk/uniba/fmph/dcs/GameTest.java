@@ -17,14 +17,16 @@ class FakeBagGame implements BagInterface {
 
     public FakeBagGame() {
         tiles = new ArrayList<>();
-        tiles.addAll(List.of(Tile.RED, Tile.GREEN, Tile.BLUE,Tile.RED, Tile.GREEN, Tile.BLUE, Tile.GREEN, Tile.BLUE));
+        tiles.addAll(List.of(Tile.RED, Tile.GREEN, Tile.BLUE, Tile.RED, Tile.GREEN, Tile.BLUE, Tile.GREEN, Tile.BLUE));
     }
+
     @Override
     public ArrayList<Tile> take(int count) {
         ArrayList<Tile> toReturn = new ArrayList<>();
-        for(int i = 0; i < count; i++) toReturn.add(tiles.get(i));
+        for (int i = 0; i < count; i++) toReturn.add(tiles.get(i));
         return toReturn;
     }
+
     @Override
     public String state() {
         return null;
@@ -34,24 +36,26 @@ class FakeBagGame implements BagInterface {
 class FakeBoard implements BoardInterface {
     //very simplify version of the correct Board class, put automatically puts tile on WallLine
     public ArrayList<ArrayList<Boolean>> tiles;
-    public FakeBoard(){
+
+    public FakeBoard() {
         tiles = new ArrayList<>();
-        for(int i = 0; i < 4 ; i++) tiles.add(new ArrayList(List.of(false, false, false, false, false)));
+        for (int i = 0; i < 4; i++) tiles.add(new ArrayList(List.of(false, false, false, false, false)));
         tiles.add(new ArrayList(List.of(false, true, true, true, true)));
     }
+
     @Override
     public void put(int destinationIdx, ArrayList<Tile> tiles) {
-        if(destinationIdx < 0 || destinationIdx >= this.tiles.size()) return;
-        if(tiles.get(0).equals(Tile.RED))
+        if (destinationIdx < 0 || destinationIdx >= this.tiles.size()) return;
+        if (tiles.get(0).equals(Tile.RED))
             this.tiles.get(destinationIdx).set(0, true);
     }
 
     @Override
     public FinishRoundResult finishRound() {
-        for(ArrayList<Boolean> a : tiles) {
+        for (ArrayList<Boolean> a : tiles) {
             boolean end = true;
-            for(boolean b : a)  end = end && b;
-            if(end) return FinishRoundResult.GAME_FINISHED;
+            for (boolean b : a) end = end && b;
+            if (end) return FinishRoundResult.GAME_FINISHED;
         }
         return FinishRoundResult.NORMAL;
     }
@@ -69,15 +73,17 @@ class FakeBoard implements BoardInterface {
 
 class FakeTableArea implements TableAreaInterface {
     ArrayList<List<Tile>> tiles;
-    public FakeTableArea(){
+
+    public FakeTableArea() {
         tiles = new ArrayList();
-        tiles.add(List.of(Tile.BLUE, Tile.BLUE,Tile.BLUE, Tile.STARTING_PLAYER));
+        tiles.add(List.of(Tile.BLUE, Tile.BLUE, Tile.BLUE, Tile.STARTING_PLAYER));
         tiles.add(List.of(Tile.GREEN, Tile.GREEN, Tile.GREEN));
     }
+
     @Override
     public ArrayList<Tile> take(int sourceIdx, int idx) {
-        if(sourceIdx < 0 || sourceIdx >= tiles.size()) throw new IndexOutOfBoundsException();
-        if(idx < 0 || idx >= tiles.get(sourceIdx).size()) throw new IndexOutOfBoundsException();
+        if (sourceIdx < 0 || sourceIdx >= tiles.size()) throw new IllegalArgumentException();
+        if (idx < 0 || idx >= tiles.get(sourceIdx).size()) throw new IllegalArgumentException();
 
         List<Tile> t = tiles.get(sourceIdx);
         tiles.set(sourceIdx, new ArrayList());
@@ -86,7 +92,7 @@ class FakeTableArea implements TableAreaInterface {
 
     @Override
     public boolean isRoundEnd() {
-        for(List<Tile> t : tiles) if(t.size() != 0) return false;
+        for (List<Tile> t : tiles) if (t.size() != 0) return false;
         return true;
     }
 
@@ -116,28 +122,31 @@ public class GameTest {
     private FakeTableArea tableArea;
     private FakeGameObserver gameObserver;
     private Game game;
+
     @Before
-    public void setUp(){
+    public void setUp() {
         bag = new FakeBagGame();
         boards = new ArrayList<>(List.of(new FakeBoard(), new FakeBoard()));
         tableArea = new FakeTableArea();
         gameObserver = new FakeGameObserver();
         game = new Game(bag, tableArea, gameObserver, boards);
     }
+
     @Test
-    public void gameTest(){
-        assertEquals("At the beginning, starting player should be 0.)",0, game.getCurrentPlayerId());
-        assertEquals("Wrong player shoulf not be allowed to take from TableArea.", false, game.take(1,0,0,0));
-        assertEquals("Wrong tile source description or tile description in source should return false.",false, game.take(0,-1,0,0) || game.take(0,0,-1,0));
-        assertEquals("After wrong sourceIdx or idx, game.playerId should not change.", 0, game.getCurrentPlayerId() );
-        assertEquals("game.take() with correct sourceIdx and idx, should return true.", true, game.take(0,1,0,4));
-        assertEquals("After successful game.take(), player should change to next player(1).",1, game.getCurrentPlayerId());
-        game.take(1,0,0,4);
+    public void gameTest() {
+        assertEquals("At the beginning, starting player should be 0.)", 0, game.getCurrentPlayerId());
+        assertEquals("Wrong player shoulf not be allowed to take from TableArea.", false, game.take(1, 0, 0, 0));
+
+        assertEquals("Wrong tile source description or tile description in source should return false.", false, game.take(0, -1, 0, 0) || game.take(0, 0, -1, 0));
+        assertEquals("After wrong sourceIdx or idx, game.playerId should not change.", 0, game.getCurrentPlayerId());
+        assertEquals("game.take() with correct sourceIdx and idx, should return true.", true, game.take(0, 1, 0, 4));
+        assertEquals("After successful game.take(), player should change to next player(1).", 1, game.getCurrentPlayerId());
+        game.take(1, 0, 0, 4);
         assertEquals("After someone takes Tile.STARTING_PLAYER, he will become starting player for next round", 1, game.getNextStartingPlayer());
         assertEquals("After TableArea is empty, new round starts if no one finished row and starting player is nextStartingPlayer.", 1, game.getCurrentPlayerId());
-        game.take(1,0,0,4);
+        game.take(1, 0, 0, 4);
         assertEquals("Current player should be 0.", 0, game.getCurrentPlayerId());
-        game.take(0,1,0,4);
+        game.take(0, 1, 0, 4);
         assertEquals("After TableArea is empty, game ends if someone finished row.", "ended", game.state());
     }
 }

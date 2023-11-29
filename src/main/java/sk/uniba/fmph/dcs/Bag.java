@@ -6,7 +6,6 @@ import interfaces.UsedTilesTakeInterface;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public final class Bag implements BagInterface {
     private static final int NUM_OF_TILES_OF_EACH_COLOR = 20;
@@ -26,6 +25,11 @@ public final class Bag implements BagInterface {
         Collections.shuffle(tiles);
     }
 
+    public Bag(final UsedTilesTakeInterface usedTiles, final ArrayList<Tile> tiles) {
+        this.usedTiles = usedTiles;
+        this.tiles = tiles;
+    }
+
     @Override
     public ArrayList<Tile> take(final int count) {
         ArrayList<Tile> toReturn = new ArrayList<>();
@@ -34,9 +38,8 @@ public final class Bag implements BagInterface {
             tiles = new ArrayList<>(usedTiles.takeAll());
             Collections.shuffle(tiles);
         }
-        Random rand = new Random();
         for (int i = toReturn.size(); i < count; i++) {
-            Tile tile = tiles.get(rand.nextInt(tiles.size()));
+            Tile tile = tiles.get(0);
             tiles.remove(tile);
             toReturn.add(tile);
         }

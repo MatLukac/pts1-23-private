@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GameFinishedInterface {
-    static FinishRoundResult gameFinished(List<List<Optional<Tile>>> wall) {
-        return null;
-    }
+    FinishRoundResult gameFinished(List<List<Optional<Tile>>> wall);
 
 }

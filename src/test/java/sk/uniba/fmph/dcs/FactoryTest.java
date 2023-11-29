@@ -2,6 +2,7 @@ package sk.uniba.fmph.dcs;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,14 +18,16 @@ class FakeBag implements BagInterface {
 
     public FakeBag() {
         tiles = new ArrayList<>();
-        tiles.addAll(List.of(Tile.RED, Tile.GREEN, Tile.BLUE,Tile.RED, Tile.GREEN, Tile.BLUE, Tile.GREEN, Tile.BLUE));
+        tiles.addAll(List.of(Tile.RED, Tile.GREEN, Tile.BLUE, Tile.RED, Tile.GREEN, Tile.BLUE, Tile.GREEN, Tile.BLUE));
     }
+
     @Override
     public ArrayList<Tile> take(int count) {
         ArrayList<Tile> toReturn = new ArrayList<>();
-        for(int i = 0; i < count; i++) toReturn.add(tiles.get(i));
+        for (int i = 0; i < count; i++) toReturn.add(tiles.get(i));
         return toReturn;
     }
+
     @Override
     public String state() {
         return null;
@@ -47,38 +50,40 @@ public class FactoryTest {
     private Factory factory;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         tableCenter = new FakeTableCenter();
         bag = new FakeBag();
-        factory = new Factory(bag,tableCenter);
+        factory = new Factory(bag, tableCenter);
     }
 
     @Test
-    public void test_factory(){
-        assertEquals("New factory should contain MAX_NUMBER_OF_TILES (4).", factory.state().length(), 4);
+    public void test_factory() {
+        factory.startNewRound();
+        assertEquals("Factory after new round should contain MAX_NUMBER_OF_TILES (4).", factory.state().length(), 4);
         assertEquals("Testing factory.state().", "RGBR", factory.state());
-        assertEquals("Wrong index should yield nothing (null)." , true, factory.take(-1) == null && factory.take(5) == null);
+        
         String state = factory.state();
-        factory.take(-1);
-        assertEquals("Factory after wrong index in take() should not change." ,factory.state(), state);
+        assertThrows(IllegalArgumentException.class, () -> factory.take(-1));
+        assertEquals("Factory after wrong index in take() should not change.", factory.state(), state);
         assertEquals("When state() != '', then isEmpty() -> false.", false, factory.isEmpty());
 
         ArrayList<Tile> tiles = factory.take(0);
         assertEquals("After take factory should be empty.", true, factory.isEmpty());
 
         boolean allEqual = true;
-        for(Tile tile : tiles)
-            if(tile != tiles.get(0)) {
+        for (Tile tile : tiles)
+            if (tile != tiles.get(0)) {
                 allEqual = false;
                 break;
             }
 
         assertEquals("factory.take() should return Tile[] of the same Tile.", true, allEqual);
         String s = "";
-        for(Tile tile : tableCenter.tiles) s += tile.toString();
+        for (Tile tile : tableCenter.tiles) s += tile.toString();
         assertEquals("Rest should go to TableCenter.", "GB", s);
         factory.startNewRound();
         assertEquals("After startNewRound(), factory should draw new tiles form bag", false, factory.isEmpty());
     }
+
 
 }

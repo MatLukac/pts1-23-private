@@ -5,11 +5,11 @@ import interfaces.FinalPointsCalculationInterface;
 import java.util.List;
 import java.util.Optional;
 
-public class FinalPointsCalculation implements FinalPointsCalculationInterface {
+public final class FinalPointsCalculation implements FinalPointsCalculationInterface {
     protected FinalPointsCalculation() {
     }
 
-    static Points getPoints(final List<List<Optional<Tile>>> wall) {
+    public Points getPoints(final List<List<Optional<Tile>>> wall) {
         Horizontal horizontalLineRule = new Horizontal();
         Vertical verticalLineRule = new Vertical();
         Color fullColorRule = new Color();

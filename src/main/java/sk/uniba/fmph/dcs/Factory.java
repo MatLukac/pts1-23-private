@@ -16,7 +16,6 @@ public final class Factory implements TileSource {
         this.bag = bag;
         this.tableCenter = tableCenter;
         tiles = new ArrayList<>();
-        startNewRound();
     }
 
     @Override
@@ -24,7 +23,7 @@ public final class Factory implements TileSource {
         ArrayList<Tile> toReturn = new ArrayList();
         ArrayList<Tile> toTableCenter = new ArrayList<>();
         if (idx < 0 || idx >= tiles.size()) {
-            return null;
+            throw new IllegalArgumentException("index not in tiles[]");
         }
         Tile chosenTile = tiles.get(idx);
         for (Tile tile : tiles) {

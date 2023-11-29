@@ -13,6 +13,10 @@ public final class UsedTiles implements UsedTilesGiveInterface, UsedTilesTakeInt
         tiles = new ArrayList<>();
     }
 
+    public UsedTiles(final ArrayList<Tile> tiles) {
+        this.tiles = tiles;
+    }
+
     @Override
 
     public void give(final Collection<Tile> newTiles) {

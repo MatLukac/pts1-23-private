@@ -1,5 +1,6 @@
 package sk.uniba.fmph.dcs;
 
+import interfaces.BoardInterface;
 import interfaces.FinalPointsCalculationInterface;
 import interfaces.GameFinishedInterface;
 import interfaces.PatternLineInterface;
@@ -11,30 +12,31 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class Board {
+public final class Board implements BoardInterface {
     private final Floor floor;
-    private final Points points;
+    private final ArrayList<Points> points;
     private final List<PatternLineInterface> patternLines;
     private final List<WallLineInterface> wallLines;
+    private final FinalPointsCalculationInterface finalPointsCalculation;
+    private final GameFinishedInterface gameFinished;
 
-    public Board(final Floor floor, final Points points, final List<PatternLineInterface> patternLines, final List<WallLineInterface> wallLines) {
 
+    public Board(final Floor floor, final ArrayList<Points> points, final List<PatternLineInterface> patternLines, final ArrayList<WallLineInterface> wallLines, final FinalPointsCalculationInterface finalPointsCalculation, final GameFinishedInterface gameFinished) {
+        this.finalPointsCalculation = finalPointsCalculation;
+        this.gameFinished = gameFinished;
         this.floor = floor;
         this.points = points;
         this.patternLines = patternLines;
         this.wallLines = wallLines;
     }
 
-    public final void put(final int destinationIndex, final List<Tile> tiles) {
+    @Override
+    public void put(final int destinationIndex, final ArrayList<Tile> tiles) {
 
         if (destinationIndex == -1) {
-
             floor.put(tiles);
-
             return;
         }
-
-
         List<Tile> toReturn = new ArrayList<>();
         for (Tile tile : tiles) {
             if (tile != Tile.STARTING_PLAYER) {
@@ -46,8 +48,8 @@ public class Board {
         patternLines.get(destinationIndex).put(toReturn);
     }
 
-
-    public final FinishRoundResult finishRound() {
+    @Override
+    public FinishRoundResult finishRound() {
 
         for (PatternLineInterface patternLine : patternLines) {
 
@@ -60,26 +62,28 @@ public class Board {
                 .map(WallLineInterface::getTiles) // Convert each WallLineInterface to List<Optional<Tile>>
                 .collect(Collectors.toList());
 
-        FinishRoundResult result = GameFinishedInterface.gameFinished(wallTiles);
+        FinishRoundResult result = gameFinished.gameFinished(wallTiles);
         if (result == FinishRoundResult.GAME_FINISHED) {
             endGame();
         }
         return result;
     }
 
-    public final void endGame() {
+    @Override
+    public void endGame() {
 
         List<List<Optional<Tile>>> wallTiles = wallLines.stream()
                 .map(WallLineInterface::getTiles) // Convert each WallLineInterface to List<Optional<Tile>>
                 .collect(Collectors.toList());
 
-        Points finalPoints = FinalPointsCalculationInterface.getPoints(wallTiles);
+        Points finalPoints = finalPointsCalculation.getPoints(wallTiles);
 
         // Add the final points to the points object
         points.add(finalPoints);
     }
 
-    public final String state() {
+    @Override
+    public String state() {
         StringBuilder stateBuilder = new StringBuilder();
 
         // Append state of each pattern line
@@ -100,11 +104,20 @@ public class Board {
 
         // Append current points
         stateBuilder.append(points.toString()).append("\n");
-
+        System.out.println(stateBuilder.toString());
         return stateBuilder.toString();
     }
 
-    public final Points getPoints() {
-        return this.points;
+    public Points getPoints() {
+        return Points.sum(points);
     }
+
+    public List<WallLineInterface> getWall() {
+        return this.wallLines;
+    }
+
+    public List<PatternLineInterface> getPatternLines() {
+        return this.patternLines;
+    }
+
 }

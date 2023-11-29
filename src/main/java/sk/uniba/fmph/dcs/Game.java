@@ -36,7 +36,7 @@ public final class Game implements GameInterface {
         ArrayList<Tile> tiles;
         try {
             tiles = tableArea.take(sourceId, idx);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IllegalArgumentException e) {
             return false;
         }
 

@@ -1,10 +1,11 @@
 package sk.uniba.fmph.dcs;
 
+import interfaces.FinalPointsCalculationInterface;
+import interfaces.GameFinishedInterface;
+import interfaces.PatternLineInterface;
 import interfaces.WallLineInterface;
 import org.junit.Before;
 import org.junit.Test;
-import interfaces.PatternLineInterface;
-import interfaces.WallLineInterface;
 
 import java.util.*;
 
@@ -74,56 +75,75 @@ class FakeWallLine implements WallLineInterface {
     }
 }
 
+class FakeFinalPointsCal implements FinalPointsCalculationInterface {
+    @Override
+    public Points getPoints(List<List<Optional<Tile>>> wall) {
+        return null;
+    }
+}
+
+class FakeGameFinished implements GameFinishedInterface {
+    @Override
+    public FinishRoundResult gameFinished(List<List<Optional<Tile>>> wall) {
+        return FinishRoundResult.NORMAL;
+    }
+}
+
 
 public class BoardTest {
     private Board board;
     private Floor fakeFloor;
-    private Points fakePoints;
+    private ArrayList<Points> fakePoints;
     private List<PatternLineInterface> fakePatternLines;
-    private List<WallLineInterface> fakeWallLines;
+    private ArrayList<WallLineInterface> fakeWallLines;
+
+    private FakeFinalPointsCal finalPointsCalculation;
+    private FakeGameFinished gameFinished;
 
     @Before
     public void setUp() {
         // Initialize the fake objects
         FakeUsedTiles usedTiles = new FakeUsedTiles();
-        ArrayList<Points> pointPattern = new ArrayList<Points>();
-        pointPattern.add(new Points(1));
-        pointPattern.add(new Points(2));
-        pointPattern.add(new Points(2));
+        ArrayList<Points> pointPattern = new ArrayList<>();
+        pointPattern.add(new Points(-1));
+        pointPattern.add(new Points(-2));
 
         fakeFloor = new Floor(usedTiles, pointPattern);
-        fakePoints = new Points(5);
+        fakePoints = new ArrayList<>(Arrays.asList(new Points(5)));
         fakePatternLines = Arrays.asList(new FakePatternLine(1), new FakePatternLine(2));
-        fakeWallLines = Arrays.asList(new FakeWallLine(), new FakeWallLine());
+        fakeWallLines = new ArrayList<>(List.of(new FakeWallLine(), new FakeWallLine()));
 
-        board = new Board(fakeFloor, fakePoints, fakePatternLines, fakeWallLines);
+        finalPointsCalculation = new FakeFinalPointsCal();
+        gameFinished = new FakeGameFinished();
+
+        board = new Board(fakeFloor, fakePoints, fakePatternLines, fakeWallLines, finalPointsCalculation, gameFinished);
     }
 
     @Test
     public void testPut() {
-        List<Tile> tiles1 = Arrays.asList(Tile.BLUE, Tile.BLUE);
+        ArrayList<Tile> tiles1 = new ArrayList(List.of(Tile.BLUE, Tile.BLUE));
         board.put(-1, tiles1);
         assertEquals("tiles should go to floor", "BB", fakeFloor.state());
-        List<Tile> tiles2 = List.of(Tile.STARTING_PLAYER);
+        ArrayList<Tile> tiles2 = new ArrayList(List.of(Tile.STARTING_PLAYER));
         board.put(0, tiles2);
         assertEquals("should go to floor", "BBS", fakeFloor.state());
-        List<Tile> tiles3 = Arrays.asList(Tile.BLACK, Tile.BLACK);
+        ArrayList<Tile> tiles3 = new ArrayList(List.of(Tile.BLACK, Tile.BLACK));
         board.put(0, tiles3);
         assertEquals("LL", fakePatternLines.get(0).state());
     }
 
     @Test
     public void testFinishRound() {
-        List<Tile> tiles1 = Arrays.asList(Tile.BLACK);
+        ArrayList<Tile> tiles1 = new ArrayList(List.of(Tile.BLACK));
         board.put(0, tiles1);
-        List<Tile> tiles2 = Arrays.asList(Tile.BLACK, Tile.BLACK);
+        ArrayList<Tile> tiles2 = new ArrayList(List.of(Tile.BLACK, Tile.BLACK));
         board.put(1, tiles2);
         board.finishRound();
         assertEquals("Points should be 5", new Points(5), board.getPoints());
-        List<Tile> tiles3 = Arrays.asList(Tile.GREEN);
+        ArrayList<Tile> tiles3 = new ArrayList(List.of(Tile.GREEN));
         board.put(-1, tiles3);
         board.finishRound();
-        assertEquals("After adding one tile to floor, points should go down minus 6", new Points(6), board.getPoints());
+        assertEquals("After adding one tile to floor, points should go down minus 1, therefore to 4", new Points(4), board.getPoints());
     }
 
     @Test
@@ -132,8 +152,8 @@ public class BoardTest {
 
     @Test
     public void testState() {
-        List<Tile> tiles1 = Arrays.asList(Tile.RED);
-        List<Tile> tiles2 = Arrays.asList(Tile.YELLOW);
+        ArrayList<Tile> tiles1 = new ArrayList(List.of(Tile.RED));
+        ArrayList<Tile> tiles2 = new ArrayList(List.of(Tile.YELLOW));
         board.put(0, tiles1);
         board.put(1, tiles2);
         String expectedState = """
@@ -145,7 +165,7 @@ public class BoardTest {
                 .....
                 Floor:
                                 
-                Points[value=5]
+                [Points[value=5]]
                 """;
         assertEquals(expectedState, board.state());
     }

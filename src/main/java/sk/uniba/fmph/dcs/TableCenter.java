@@ -1,10 +1,12 @@
 package sk.uniba.fmph.dcs;
 
+import interfaces.TableCenterAddInterface;
 import interfaces.TileSource;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
-public final class TableCenter implements TileSource {
+public final class TableCenter implements TileSource, TableCenterAddInterface {
     private ArrayList<Tile> tiles;
     private boolean isFirst;
 
@@ -13,14 +15,15 @@ public final class TableCenter implements TileSource {
         isFirst = true;
     }
 
-    public void add(final ArrayList<Tile> tiles) {
+    @Override
+    public void add(final Collection<Tile> tiles) {
         this.tiles.addAll(tiles);
     }
 
     @Override
     public ArrayList<Tile> take(final int idx) {
-        if (idx > tiles.size()) {
-            throw new IndexOutOfBoundsException("Index out of bounds");
+        if (idx < 0 || idx > tiles.size()) {
+            throw new IllegalArgumentException("index not in tiles[]");
         }
         Tile pickedTile = tiles.get(idx);
         ArrayList<Tile> pickedTiles = new ArrayList<Tile>();

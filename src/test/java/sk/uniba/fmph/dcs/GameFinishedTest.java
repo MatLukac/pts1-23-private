@@ -1,5 +1,6 @@
 package sk.uniba.fmph.dcs;
 
+import interfaces.GameFinishedInterface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,12 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class GameFinishedTest {
     private java.util.List<Tile> tiles;
     private java.util.List<java.util.List<Optional<Tile>>> wall;
+    private GameFinishedInterface gameFinished;
 
     @BeforeEach
     public void setUp() {
         initializeTiles();
         initializeWall();
-
+        gameFinished = new GameFinished();
     }
 
     private void initializeTiles() {
@@ -55,13 +57,14 @@ public class GameFinishedTest {
         wall.get(2).set(0, Optional.of(tiles.get(0)));
         wall.get(3).set(1, Optional.of(tiles.get(1)));
 
-        FinishRoundResult result = GameFinished.gameFinished(wall);
+        FinishRoundResult result = gameFinished.gameFinished(wall);
 
         assertEquals(FinishRoundResult.GAME_FINISHED, result);
     }
+
     @Test
     public void testGameFinishedEmptyWall() {
-        FinishRoundResult result = GameFinished.gameFinished(wall);
+        FinishRoundResult result = gameFinished.gameFinished(wall);
 
         assertEquals(FinishRoundResult.NORMAL, result);
     }

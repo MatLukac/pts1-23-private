@@ -14,6 +14,9 @@ public final class TableArea implements TableAreaInterface {
 
     @Override
     public ArrayList<Tile> take(final int sourceIdx, final int idx) {
+        if (sourceIdx < 0 || sourceIdx >= tileSources.size()) {
+            throw new IllegalArgumentException("index not in tiles[]");
+        }
         return tileSources.get(sourceIdx).take(idx);
     }
 
@@ -38,7 +41,7 @@ public final class TableArea implements TableAreaInterface {
     public String state() {
         String toReturn = "";
         for (final TileSource tileSource : tileSources) {
-            toReturn += tileSource.toString();
+            toReturn += tileSource.state();
         }
         return toReturn;
     }
