@@ -58,48 +58,56 @@ public final class WallLine implements WallLineInterface {
             int idx = tileTypes.indexOf(tile);
             this.occupiedTiles[idx] = true;
 
-            int points = 1;
+            int points = 0;
+            if ((1 + idx < tileTypes.size() && occupiedTiles[1 + idx]) || (idx - 1 >= 0 && occupiedTiles[idx - 1])) {
+                points = 1;
+                int offset = 1;
+                while (offset + idx < tileTypes.size()) {
+                    if (occupiedTiles[offset + idx]) {
+                        points++;
+                        offset++;
+                    } else {
+                        break;
+                    }
+                }
 
-            int offset = 1;
-            while (offset + idx < tileTypes.size()) {
-                if (occupiedTiles[offset + idx]) {
-                    points++;
-                    offset++;
-                } else {
-                    break;
+                offset = 1;
+                while (idx - offset >= 0) {
+                    if (occupiedTiles[idx - offset]) {
+                        points++;
+                        offset++;
+                    } else {
+                        break;
+                    }
                 }
             }
 
-            offset = 1;
-            while (idx - offset >= 0) {
-                if (occupiedTiles[idx - offset]) {
-                    points++;
-                    offset++;
-                } else {
-                    break;
-                }
-            }
 
             WallLine current = this;
-            while (current.lineUp != null) {
-                if (!current.lineUp.getTiles().get(idx).isEmpty()) {
-                    points++;
-                    current = current.lineUp;
-                } else {
-                    break;
+            if ((current.lineUp != null && !current.lineUp.getTiles().get(idx).isEmpty()) || (current.lineDown != null && !current.lineDown.getTiles().get(idx).isEmpty())) {
+                points++;
+                while (current.lineUp != null) {
+                    if (!current.lineUp.getTiles().get(idx).isEmpty()) {
+                        points++;
+                        current = current.lineUp;
+                    } else {
+                        break;
+                    }
+                }
+
+                current = this;
+                //if (current.lineDown != null && !current.lineDown.getTiles().get(idx).isEmpty()) points++;
+                while (current.lineDown != null) {
+                    if (!current.lineDown.getTiles().get(idx).isEmpty()) {
+                        points++;
+                        current = current.lineDown;
+                    } else {
+                        break;
+                    }
                 }
             }
 
-            current = this;
-            while (current.lineDown != null) {
-                if (!current.lineDown.getTiles().get(idx).isEmpty()) {
-                    points++;
-                    current = current.lineDown;
-                } else {
-                    break;
-                }
-            }
-
+            if (points == 0) return new Points(1);
             return new Points(points);
 
         }

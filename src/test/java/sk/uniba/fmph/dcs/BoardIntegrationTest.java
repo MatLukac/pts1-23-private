@@ -1,8 +1,5 @@
 package sk.uniba.fmph.dcs;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-
 import java.lang.reflect.Array;
 import java.util.*;
 
@@ -12,6 +9,8 @@ import interfaces.UsedTilesGiveInterface;
 import interfaces.UsedTilesTakeInterface;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 
 class FakeUsedTilesGive implements UsedTilesGiveInterface {
@@ -68,7 +67,7 @@ public class BoardIntegrationTest {
         patternLines.add(new PatternLine(4, wallLines.get(3), floor, usedTiles));
         patternLines.add(new PatternLine(5, wallLines.get(4), floor, usedTiles));
 
-        board = new Board(floor, new ArrayList(List.of(new Points(1))), new ArrayList(patternLines), new ArrayList(wallLines), finalPointsCalculation, gameFinished);
+        board = new Board(floor, new ArrayList(), new ArrayList(patternLines), new ArrayList(wallLines), finalPointsCalculation, gameFinished);
     }
 
     @Test
@@ -97,11 +96,53 @@ public class BoardIntegrationTest {
 
         assertEquals("There is no finish row, so finishRound should yield FinishRoundResult.NORMAL.", FinishRoundResult.NORMAL, board.finishRound());
         //System.out.println(wallLines.get(4).state());
-        assertEquals("After board.finishRound(), first wall should be '__R__'.", "__R__", wallLines.get(0).state());
+        assertEquals("After board.finishRound(), first wall should be  '__R__'.", "__R__", wallLines.get(0).state());
         assertEquals("After board.finishRound(), second wall should be '___R_'.", "___R_", wallLines.get(1).state());
-        assertEquals("After board.finishRound(), third wall should be '____R'.", "____R", wallLines.get(2).state());
+        assertEquals("After board.finishRound(), third wall should be  '____R'.", "____R", wallLines.get(2).state());
         assertEquals("After board.finishRound(), fourth wall should be 'R____'.", "R____", wallLines.get(3).state());
-        assertEquals("After board.finishRound(), fifth wall should be '_____'.", "_____", wallLines.get(4).state());
+        assertEquals("After board.finishRound(), fifth wall should be  '_____'.", "_____", wallLines.get(4).state());
+        assertSame("After board.finishRound(), floor should be empty.", "", floor.state());
 
+        assertEquals("Player now should have 3 points.", 3, board.getPoints().getValue());
+
+        for (WallLine wallLine : wallLines) System.out.println(wallLine.state());
+        System.out.println(board.getPoints().getValue());
+
+        board.put(0, new ArrayList(List.of(Tile.GREEN)));
+        board.put(1, new ArrayList(List.of(Tile.GREEN, Tile.GREEN)));
+        board.put(2, new ArrayList(List.of(Tile.GREEN, Tile.GREEN, Tile.GREEN)));
+        board.put(3, new ArrayList(List.of(Tile.BLACK, Tile.BLACK, Tile.BLACK, Tile.BLACK)));
+        board.put(4, new ArrayList(List.of(Tile.GREEN)));
+
+        assertEquals("First PatternLine should contain 'G'.", "G", patternLines.get(0).state());
+        assertEquals("Second PatternLine should contain 'GG'.", "GG", patternLines.get(1).state());
+        assertEquals("Third PatternLine should contain 'GGG'.", "GGG", patternLines.get(2).state());
+        assertEquals("Fourth PatternLine should contain 'LLLL'.", "LLLL", patternLines.get(3).state());
+        assertEquals("Fifth PatternLine should contain 'RRR'.", "RRR", patternLines.get(4).state());
+        assertEquals("Floor now should contain 'G'.", "G", floor.state());
+
+        assertEquals("There is no finish row, so finishRound should yield FinishRoundResult.NORMAL.", FinishRoundResult.NORMAL, board.finishRound());
+
+        assertEquals("Player now should have points.", 9, board.getPoints().getValue());
+        System.out.println();
+        for (WallLine wallLine : wallLines) System.out.println(wallLine.state());
+
+        //System.out.println(board.getPoints().getValue());
+        //Let's fill the row, column and color to test endGame Points rewards
+
+        board.put(0, new ArrayList(List.of(Tile.BLUE)));
+        board.put(1, new ArrayList(List.of(Tile.BLUE, Tile.BLUE)));
+        board.put(4, new ArrayList(List.of(Tile.RED, Tile.RED)));
+        assertEquals("Round should end with exist FinishRoundResult.NORMAL .", FinishRoundResult.NORMAL, board.finishRound());
+        assertEquals("points = 20, 9 + 2 for two linked tiles in column (blue patternLine0) + 2 for two linked tiles in row (blue patternLine1) " +
+                "+ 3 for three linked tiles in column (blue patternLine1) + 4 for four linked tiles in column (red patternLine4).", 20, board.getPoints().getValue());
+
+        board.put(0, new ArrayList(List.of(Tile.YELLOW)));
+        assertEquals("Round should end with exist FinishRoundResult.NORMAL .", FinishRoundResult.NORMAL, board.finishRound());
+        assertEquals("points = 28, 20 + 3 for three linked tiles in row (yellow patternLine0) + 5 linked tiles for tiles in column (yellow patternLine0).", 28, board.getPoints().getValue());
+
+        board.put(0, new ArrayList(List.of(Tile.BLACK)));
+        assertEquals("Round should end with exist FinishRoundResult.GAME_FINISHED .", FinishRoundResult.GAME_FINISHED, board.finishRound());
+        assertEquals("points = 54, 28 + 5 for five linked tiles in a row (black patternLine0) + 2 for two linked tiles in column (black patternLine0) + 2 for full row + 7 for full column + 10 for full collor", 54, board.getPoints().getValue());
     }
 }

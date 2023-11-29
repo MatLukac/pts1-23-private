@@ -52,9 +52,9 @@ public final class Board implements BoardInterface {
     public FinishRoundResult finishRound() {
 
         for (PatternLineInterface patternLine : patternLines) {
-
             points.add(patternLine.finishRound());
         }
+
 
         points.add(floor.finishRound());
 

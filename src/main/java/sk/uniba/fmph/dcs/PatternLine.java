@@ -53,7 +53,9 @@ public final class PatternLine implements PatternLineInterface {
         tiles.remove(tile);
         usedTiles.give(tiles);
         tiles.removeAll(tiles);
-        return wallLine.putTile(tile);
+        Points p = wallLine.putTile(tile);
+        System.out.println(p.getValue());
+        return p;
     }
 
     @Override
