@@ -26,8 +26,10 @@ public final class PatternLine implements PatternLineInterface {
 
     @Override
     public void put(final Collection<Tile> tiles) {
-
-        if (!wallLine.canPutTile(tiles.iterator().next()) || (this.tiles.size() != 0 && this.tiles.get(0) != tiles.iterator().next())) {
+        if (tiles.size() == 0) {
+            return;
+        }
+        if (tiles.iterator().next() == Tile.STARTING_PLAYER || !wallLine.canPutTile(tiles.iterator().next()) || (this.tiles.size() != 0 && this.tiles.get(0) != tiles.iterator().next())) {
             floor.put(tiles);
             return;
         }
@@ -54,7 +56,6 @@ public final class PatternLine implements PatternLineInterface {
         usedTiles.give(tiles);
         tiles.removeAll(tiles);
         Points p = wallLine.putTile(tile);
-        System.out.println(p.getValue());
         return p;
     }
 

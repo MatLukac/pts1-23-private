@@ -18,14 +18,22 @@ public final class WallLine implements WallLineInterface {
         this.tileTypes = new ArrayList<>(tileTypes);
         this.lineUp = lineUp;
         this.lineDown = lineDown;
-
         this.occupiedTiles = new boolean[tileTypes.size()];
     }
 
+    public WallLine(final List<Tile> tileTypes, final WallLine lineUp, final WallLine lineDown, final boolean[] occupiedTiles) {
+        this.tileTypes = new ArrayList<>(tileTypes);
+        this.lineUp = lineUp;
+        this.lineDown = lineDown;
+        this.occupiedTiles = occupiedTiles;
+    }
+
+    @Override
     public void setLineUp(final WallLine lineUp) {
         this.lineUp = lineUp;
     }
 
+    @Override
     public void setLineDown(final WallLine lineDown) {
         this.lineDown = lineDown;
     }
@@ -96,7 +104,6 @@ public final class WallLine implements WallLineInterface {
                 }
 
                 current = this;
-                //if (current.lineDown != null && !current.lineDown.getTiles().get(idx).isEmpty()) points++;
                 while (current.lineDown != null) {
                     if (!current.lineDown.getTiles().get(idx).isEmpty()) {
                         points++;
@@ -107,7 +114,9 @@ public final class WallLine implements WallLineInterface {
                 }
             }
 
-            if (points == 0) return new Points(1);
+            if (points == 0) {
+                return new Points(1);
+            }
             return new Points(points);
 
         }

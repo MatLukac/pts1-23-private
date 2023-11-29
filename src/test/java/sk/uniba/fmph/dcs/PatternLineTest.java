@@ -1,4 +1,5 @@
 package sk.uniba.fmph.dcs;
+
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
@@ -11,7 +12,10 @@ import org.junit.Test;
 
 class FakeFloor implements FloorPutInterface {
     public ArrayList<Tile> tiles;
-    public FakeFloor() {tiles = new ArrayList();}
+
+    public FakeFloor() {
+        tiles = new ArrayList();
+    }
 
     @Override
     public void put(Collection<Tile> tiles) {
@@ -21,13 +25,15 @@ class FakeFloor implements FloorPutInterface {
 
 class FakeWallLinePatternLine implements WallLineInterface {
     public ArrayList<Optional<Tile>> tiles;
-    public FakeWallLinePatternLine() {tiles = new ArrayList<>();}
+
+    public FakeWallLinePatternLine() {
+        tiles = new ArrayList<>();
+    }
 
     @Override
     public boolean canPutTile(Tile tile) {
-        if(tiles.contains(tile)) return false;
+        if (tiles.contains(tile)) return false;
         else return true;
-
     }
 
     @Override
@@ -42,6 +48,14 @@ class FakeWallLinePatternLine implements WallLineInterface {
     }
 
     @Override
+    public void setLineUp(WallLine lineUp) {
+    }
+
+    @Override
+    public void setLineDown(WallLine lineUp) {
+    }
+
+    @Override
     public String state() {
         return null;
     }
@@ -52,35 +66,36 @@ public class PatternLineTest {
     private FakeFloor floor;
     private FakeWallLine wallLine;
     private PatternLine patternLine;
+
     @Before
-    public void setUp(){
+    public void setUp() {
         usedTiles = new FakeUsedTiles();
         wallLine = new FakeWallLine();
         floor = new FakeFloor();
-        patternLine = new PatternLine(4,wallLine, floor, usedTiles);
+        patternLine = new PatternLine(4, wallLine, floor, usedTiles);
     }
 
     @Test
-    public void patternLineTest(){
-        assertEquals("PatternLine should be empty when created." , "", patternLine.state());
+    public void patternLineTest() {
+        assertEquals("PatternLine should be empty when created.", "", patternLine.state());
         patternLine.put(List.of(Tile.RED, Tile.RED));
         String state = patternLine.state();
         assertEquals("PatternLine now should contain RR.", "RR", patternLine.state());
         patternLine.put(List.of(Tile.GREEN, Tile.GREEN));
         assertEquals("Pattern should not add 'GG' when already contains 'RR'.", state, patternLine.state());
         String s = "";
-        for(Tile tile : floor.tiles) s += tile.toString();
+        for (Tile tile : floor.tiles) s += tile.toString();
         assertEquals("After false put(), patternLine should put them in Foor.", s, "GG");
         patternLine.finishRound();
-        assertEquals("If PatternLine is not fulled to its capacity, then finishRound() should not change PatternLine.",state, patternLine.state());
+        assertEquals("If PatternLine is not fulled to its capacity, then finishRound() should not change PatternLine.", state, patternLine.state());
         patternLine.put(List.of(Tile.RED, Tile.RED, Tile.RED));
         assertEquals("PatternLine now should be full.", "RRRR", patternLine.state());
         s = "";
-        for(Tile tile : floor.tiles) s += tile.toString();
-        assertEquals("Extra tiles should be in Floor.", s,"GGR");
+        for (Tile tile : floor.tiles) s += tile.toString();
+        assertEquals("Extra tiles should be in Floor.", s, "GGR");
         patternLine.finishRound();
         s = "";
-        for(Tile tile : usedTiles.tiles) s += tile.toString();
+        for (Tile tile : usedTiles.tiles) s += tile.toString();
         assertEquals("When PatternLine is full, after finishRound() one is placed to WallLine and rest to UsedTiles.", "RRR", s);
     }
 }

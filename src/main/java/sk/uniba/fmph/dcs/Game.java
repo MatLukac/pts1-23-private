@@ -61,7 +61,7 @@ public final class Game implements GameInterface {
             for (BoardInterface board : boards) {
                 board.endGame();
             }
-            gameObserver.notifyEverybody("Game ended;");
+            gameObserver.notifyEverybody("Game ended.");
             gameState = "ended";
         } else {
             gameObserver.notifyEverybody("New round started.");

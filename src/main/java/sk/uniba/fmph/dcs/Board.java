@@ -103,8 +103,8 @@ public final class Board implements BoardInterface {
         stateBuilder.append(floor.state()).append("\n");
 
         // Append current points
-        stateBuilder.append(points.toString()).append("\n");
-        System.out.println(stateBuilder.toString());
+        stateBuilder.append(Points.sum(points).toString()).append("\n");
+        //System.out.println(stateBuilder.toString());
         return stateBuilder.toString();
     }
 

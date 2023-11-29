@@ -70,6 +70,16 @@ class FakeWallLine implements WallLineInterface {
     }
 
     @Override
+    public void setLineUp(WallLine lineUp) {
+
+    }
+
+    @Override
+    public void setLineDown(WallLine lineUp) {
+
+    }
+
+    @Override
     public String state() {
         return ".....";
     }

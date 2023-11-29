@@ -5,13 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="149701b4-3871-48b1-9ff3-9b9a7ff3faad" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/FullIntegrationTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interfaces/WallLineInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/WallLineInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Bag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Bag.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/PatternLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/PatternLine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/WallLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sk/uniba/fmph/dcs/WallLine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/BoardIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/BoardIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/WallLineTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/WallLineTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/BoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/BoardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/PatternLineTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sk/uniba/fmph/dcs/PatternLineTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +55,22 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.BoardIntegrationTest.boardIntegrationTest">
+  <component name="RunManager" selected="JUnit.FullIntegrationTest.fullIntegrationTest">
+    <configuration name="BagTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AZUL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sk.uniba.fmph.dcs.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="sk.uniba.fmph.dcs" />
+      <option name="MAIN_CLASS_NAME" value="sk.uniba.fmph.dcs.BagTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BoardIntegrationTest.boardIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AZUL" />
       <extension name="coverage">
@@ -83,7 +102,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TableAreaIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FullIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AZUL" />
       <extension name="coverage">
         <pattern>
@@ -92,13 +111,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="sk.uniba.fmph.dcs" />
-      <option name="MAIN_CLASS_NAME" value="sk.uniba.fmph.dcs.TableAreaIntegrationTest" />
+      <option name="MAIN_CLASS_NAME" value="sk.uniba.fmph.dcs.FullIntegrationTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WallLineTest.testPutTile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FullIntegrationTest.fullIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AZUL" />
       <extension name="coverage">
         <pattern>
@@ -107,24 +126,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="sk.uniba.fmph.dcs" />
-      <option name="MAIN_CLASS_NAME" value="sk.uniba.fmph.dcs.WallLineTest" />
-      <option name="METHOD_NAME" value="testPutTile" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="WallLineTest.testState" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="AZUL" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="sk.uniba.fmph.dcs.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="sk.uniba.fmph.dcs" />
-      <option name="MAIN_CLASS_NAME" value="sk.uniba.fmph.dcs.WallLineTest" />
-      <option name="METHOD_NAME" value="testState" />
+      <option name="MAIN_CLASS_NAME" value="sk.uniba.fmph.dcs.FullIntegrationTest" />
+      <option name="METHOD_NAME" value="fullIntegrationTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -132,11 +135,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BoardIntegrationTest.boardIntegrationTest" />
-        <item itemvalue="JUnit.WallLineTest.testPutTile" />
-        <item itemvalue="JUnit.WallLineTest.testState" />
+        <item itemvalue="JUnit.FullIntegrationTest.fullIntegrationTest" />
         <item itemvalue="JUnit.BoardTest" />
-        <item itemvalue="JUnit.TableAreaIntegrationTest" />
+        <item itemvalue="JUnit.FullIntegrationTest" />
+        <item itemvalue="JUnit.BagTest" />
+        <item itemvalue="JUnit.BoardIntegrationTest.boardIntegrationTest" />
       </list>
     </recent_temporary>
   </component>
@@ -150,6 +153,17 @@
       <updated>1700683802506</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

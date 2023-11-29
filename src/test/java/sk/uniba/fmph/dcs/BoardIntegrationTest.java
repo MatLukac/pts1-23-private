@@ -3,10 +3,7 @@ package sk.uniba.fmph.dcs;
 import java.lang.reflect.Array;
 import java.util.*;
 
-import interfaces.FinalPointsCalculationInterface;
-import interfaces.PatternLineInterface;
-import interfaces.UsedTilesGiveInterface;
-import interfaces.UsedTilesTakeInterface;
+import interfaces.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,8 +27,8 @@ public class BoardIntegrationTest {
     private Board board;
     private FinalPointsCalculation finalPointsCalculation;
     private GameFinished gameFinished;
-    private ArrayList<WallLine> wallLines;
-    private ArrayList<PatternLine> patternLines;
+    private ArrayList<WallLineInterface> wallLines;
+    private ArrayList<PatternLineInterface> patternLines;
     private Floor floor;
     private FakeUsedTilesGive usedTiles;
 
@@ -51,14 +48,14 @@ public class BoardIntegrationTest {
         wallLines.add(new WallLine(List.of(Tile.RED, Tile.BLACK, Tile.GREEN, Tile.BLUE, Tile.YELLOW), null, null));
         wallLines.add(new WallLine(List.of(Tile.YELLOW, Tile.RED, Tile.BLACK, Tile.GREEN, Tile.BLUE), null, null));
 
-        wallLines.get(0).setLineDown(wallLines.get(1));
-        wallLines.get(1).setLineUp(wallLines.get(0));
-        wallLines.get(1).setLineDown(wallLines.get(2));
-        wallLines.get(2).setLineUp(wallLines.get(1));
-        wallLines.get(2).setLineDown(wallLines.get(3));
-        wallLines.get(3).setLineUp(wallLines.get(2));
-        wallLines.get(3).setLineDown(wallLines.get(4));
-        wallLines.get(4).setLineUp(wallLines.get(3));
+        wallLines.get(0).setLineDown((WallLine) wallLines.get(1));
+        wallLines.get(1).setLineUp((WallLine) wallLines.get(0));
+        wallLines.get(1).setLineDown((WallLine) wallLines.get(2));
+        wallLines.get(2).setLineUp((WallLine) wallLines.get(1));
+        wallLines.get(2).setLineDown((WallLine) wallLines.get(3));
+        wallLines.get(3).setLineUp((WallLine) wallLines.get(2));
+        wallLines.get(3).setLineDown((WallLine) wallLines.get(4));
+        wallLines.get(4).setLineUp((WallLine) wallLines.get(3));
 
         patternLines = new ArrayList(5);
         patternLines.add(new PatternLine(1, wallLines.get(0), floor, usedTiles));
@@ -67,7 +64,7 @@ public class BoardIntegrationTest {
         patternLines.add(new PatternLine(4, wallLines.get(3), floor, usedTiles));
         patternLines.add(new PatternLine(5, wallLines.get(4), floor, usedTiles));
 
-        board = new Board(floor, new ArrayList(), new ArrayList(patternLines), new ArrayList(wallLines), finalPointsCalculation, gameFinished);
+        board = new Board(floor, new ArrayList(), patternLines, wallLines, finalPointsCalculation, gameFinished);
     }
 
     @Test
@@ -75,7 +72,7 @@ public class BoardIntegrationTest {
         for (int i = 0; i < 0; i++) {
             assertEquals("All WallLines should be empty when created.", "_".repeat(i), wallLines.get(i).state());
         }
-        for (PatternLine patternLine : patternLines) {
+        for (PatternLineInterface patternLine : patternLines) {
             assertEquals("All PatternLines should be empty when created.", "", patternLine.state());
         }
 
@@ -105,7 +102,7 @@ public class BoardIntegrationTest {
 
         assertEquals("Player now should have 3 points.", 3, board.getPoints().getValue());
 
-        for (WallLine wallLine : wallLines) System.out.println(wallLine.state());
+        for (WallLineInterface wallLine : wallLines) System.out.println(wallLine.state());
         System.out.println(board.getPoints().getValue());
 
         board.put(0, new ArrayList(List.of(Tile.GREEN)));
@@ -125,7 +122,7 @@ public class BoardIntegrationTest {
 
         assertEquals("Player now should have points.", 9, board.getPoints().getValue());
         System.out.println();
-        for (WallLine wallLine : wallLines) System.out.println(wallLine.state());
+        for (WallLineInterface wallLine : wallLines) System.out.println(wallLine.state());
 
         //System.out.println(board.getPoints().getValue());
         //Let's fill the row, column and color to test endGame Points rewards
