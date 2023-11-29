@@ -77,12 +77,12 @@ public class PatternLineTest {
 
     @Test
     public void patternLineTest() {
-        assertEquals("PatternLine should be empty when created.", "", patternLine.state());
+        assertEquals("PatternLine should be empty when created.", "....", patternLine.state());
         patternLine.put(List.of(Tile.RED, Tile.RED));
         String state = patternLine.state();
-        assertEquals("PatternLine now should contain RR.", "RR", patternLine.state());
+        assertEquals("PatternLine now should contain RR.", "RR..", patternLine.state());
         patternLine.put(List.of(Tile.GREEN, Tile.GREEN));
-        assertEquals("Pattern should not add 'GG' when already contains 'RR'.", state, patternLine.state());
+        assertEquals("Pattern should not add 'GG' when already contains 'RR..'.", state, patternLine.state());
         String s = "";
         for (Tile tile : floor.tiles) s += tile.toString();
         assertEquals("After false put(), patternLine should put them in Foor.", s, "GG");

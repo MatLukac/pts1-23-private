@@ -135,8 +135,6 @@ public class FullIntegrationTest {
         assertEquals(true, game.take(1, 0, 0, 0));
         assertEquals("Observer should hold state: Game ended.", "Game ended.", observer.getState());
         for (BoardInterface b : boards) System.out.println(b.state());
-
-
     }
 
 }

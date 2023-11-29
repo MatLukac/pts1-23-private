@@ -69,11 +69,11 @@ public class BoardIntegrationTest {
 
     @Test
     public void boardIntegrationTest() {
-        for (int i = 0; i < 0; i++) {
-            assertEquals("All WallLines should be empty when created.", "_".repeat(i), wallLines.get(i).state());
+        for (int i = 0; i < 5; i++) {
+            assertEquals("All WallLines should be empty when created.", "_".repeat(5), wallLines.get(i).state());
         }
-        for (PatternLineInterface patternLine : patternLines) {
-            assertEquals("All PatternLines should be empty when created.", "", patternLine.state());
+        for (int i = 0; i < 5; i++) {
+            assertEquals("All PatternLines should be empty when created.", ".".repeat(i + 1), patternLines.get(i).state());
         }
 
         assertEquals("Floor should be empty when created.", "", floor.state());
@@ -88,7 +88,7 @@ public class BoardIntegrationTest {
         assertEquals("Second PatternLine should contain 'RR'.", "RR", patternLines.get(1).state());
         assertEquals("Third PatternLine should contain 'RRR'.", "RRR", patternLines.get(2).state());
         assertEquals("Fourth PatternLine should contain 'RRRR'.", "RRRR", patternLines.get(3).state());
-        assertEquals("Fifth PatternLine should contain 'RRR'.", "RRR", patternLines.get(4).state());
+        assertEquals("Fifth PatternLine should contain 'RRR..'.", "RRR..", patternLines.get(4).state());
         assertEquals("Floor now should contain 'RR'.", "R", floor.state());
 
         assertEquals("There is no finish row, so finishRound should yield FinishRoundResult.NORMAL.", FinishRoundResult.NORMAL, board.finishRound());
@@ -102,9 +102,6 @@ public class BoardIntegrationTest {
 
         assertEquals("Player now should have 3 points.", 3, board.getPoints().getValue());
 
-        for (WallLineInterface wallLine : wallLines) System.out.println(wallLine.state());
-        System.out.println(board.getPoints().getValue());
-
         board.put(0, new ArrayList(List.of(Tile.GREEN)));
         board.put(1, new ArrayList(List.of(Tile.GREEN, Tile.GREEN)));
         board.put(2, new ArrayList(List.of(Tile.GREEN, Tile.GREEN, Tile.GREEN)));
@@ -115,18 +112,14 @@ public class BoardIntegrationTest {
         assertEquals("Second PatternLine should contain 'GG'.", "GG", patternLines.get(1).state());
         assertEquals("Third PatternLine should contain 'GGG'.", "GGG", patternLines.get(2).state());
         assertEquals("Fourth PatternLine should contain 'LLLL'.", "LLLL", patternLines.get(3).state());
-        assertEquals("Fifth PatternLine should contain 'RRR'.", "RRR", patternLines.get(4).state());
+        assertEquals("Fifth PatternLine should contain 'RRR..'.", "RRR..", patternLines.get(4).state());
         assertEquals("Floor now should contain 'G'.", "G", floor.state());
 
         assertEquals("There is no finish row, so finishRound should yield FinishRoundResult.NORMAL.", FinishRoundResult.NORMAL, board.finishRound());
 
         assertEquals("Player now should have points.", 9, board.getPoints().getValue());
-        System.out.println();
-        for (WallLineInterface wallLine : wallLines) System.out.println(wallLine.state());
 
-        //System.out.println(board.getPoints().getValue());
         //Let's fill the row, column and color to test endGame Points rewards
-
         board.put(0, new ArrayList(List.of(Tile.BLUE)));
         board.put(1, new ArrayList(List.of(Tile.BLUE, Tile.BLUE)));
         board.put(4, new ArrayList(List.of(Tile.RED, Tile.RED)));

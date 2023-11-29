@@ -10,7 +10,6 @@ public final class GameObserver implements GameObserverInterface {
     private List<ObserverInterface> observers;
 
     public GameObserver() {
-
         observers = new ArrayList<>();
     }
 

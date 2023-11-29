@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public final class FinalPointsCalculation implements FinalPointsCalculationInterface {
-    protected FinalPointsCalculation() {
-    }
-
+    @Override
     public Points getPoints(final List<List<Optional<Tile>>> wall) {
         Horizontal horizontalLineRule = new Horizontal();
         Vertical verticalLineRule = new Vertical();

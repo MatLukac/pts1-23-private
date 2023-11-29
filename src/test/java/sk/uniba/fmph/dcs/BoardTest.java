@@ -175,9 +175,10 @@ public class BoardTest {
                 .....
                 Floor:
                                 
-                [Points[value=5]]
+                Points[value=5]
                 """;
         assertEquals(expectedState, board.state());
+
     }
 
 }

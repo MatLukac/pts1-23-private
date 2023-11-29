@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 public final class GameFinished implements GameFinishedInterface {
-    protected GameFinished() {
-    }
-
     public FinishRoundResult gameFinished(final List<List<Optional<Tile>>> wall) {
         Horizontal horizontal = new Horizontal();
         if (horizontal.calculatePoints(wall) >= 2) {

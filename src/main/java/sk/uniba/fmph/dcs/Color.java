@@ -5,17 +5,13 @@ import interfaces.Calculation;
 import java.util.List;
 import java.util.Optional;
 
-public class Color implements Calculation {
-    public final int calculatePoints(final List<List<Optional<Tile>>> wall) {
-        return calculate(wall);
-    }
-
+public final class Color implements Calculation {
     private static final int NUM_OF_COLORS = 5;
     private static final int NUM_OF_TILES_OF_THE_SAME_COLOR = 5;
     private static final int POINTS_FOR_COLOR = 10;
 
     @Override
-    public final int calculate(final List<List<Optional<Tile>>> wall) {
+    public int calculate(final List<List<Optional<Tile>>> wall) {
         int totalPoints = 0;
         for (int colorIndex = 0; colorIndex < NUM_OF_COLORS; colorIndex++) {
             if (isColorComplete(wall, colorIndex)) {

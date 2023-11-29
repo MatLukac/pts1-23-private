@@ -21,7 +21,6 @@ public final class PatternLine implements PatternLineInterface {
         this.floor = floor;
         this.usedTiles = usedTiles;
         tiles = new ArrayList(capacity);
-
     }
 
     @Override
@@ -64,6 +63,9 @@ public final class PatternLine implements PatternLineInterface {
         String toReturn = "";
         for (final Tile tile : tiles) {
             toReturn += tile.toString();
+        }
+        while (toReturn.length() != capacity) {
+            toReturn += ".";
         }
         return toReturn;
     }

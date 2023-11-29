@@ -20,7 +20,6 @@ public final class Board implements BoardInterface {
     private final FinalPointsCalculationInterface finalPointsCalculation;
     private final GameFinishedInterface gameFinished;
 
-
     public Board(final Floor floor, final ArrayList<Points> points, final ArrayList<PatternLineInterface> patternLines, final ArrayList<WallLineInterface> wallLines, final FinalPointsCalculationInterface finalPointsCalculation, final GameFinishedInterface gameFinished) {
         this.finalPointsCalculation = finalPointsCalculation;
         this.gameFinished = gameFinished;
@@ -32,7 +31,6 @@ public final class Board implements BoardInterface {
 
     @Override
     public void put(final int destinationIndex, final ArrayList<Tile> tiles) {
-
         if (destinationIndex == -1) {
             floor.put(tiles);
             return;
@@ -50,14 +48,10 @@ public final class Board implements BoardInterface {
 
     @Override
     public FinishRoundResult finishRound() {
-
         for (PatternLineInterface patternLine : patternLines) {
             points.add(patternLine.finishRound());
         }
-
-
         points.add(floor.finishRound());
-
         List<List<Optional<Tile>>> wallTiles = wallLines.stream()
                 .map(WallLineInterface::getTiles) // Convert each WallLineInterface to List<Optional<Tile>>
                 .collect(Collectors.toList());
@@ -71,13 +65,10 @@ public final class Board implements BoardInterface {
 
     @Override
     public void endGame() {
-
         List<List<Optional<Tile>>> wallTiles = wallLines.stream()
                 .map(WallLineInterface::getTiles) // Convert each WallLineInterface to List<Optional<Tile>>
                 .collect(Collectors.toList());
-
         Points finalPoints = finalPointsCalculation.getPoints(wallTiles);
-
         // Add the final points to the points object
         points.add(finalPoints);
     }
@@ -111,13 +102,4 @@ public final class Board implements BoardInterface {
     public Points getPoints() {
         return Points.sum(points);
     }
-
-    public List<WallLineInterface> getWall() {
-        return this.wallLines;
-    }
-
-    public List<PatternLineInterface> getPatternLines() {
-        return this.patternLines;
-    }
-
 }

@@ -28,7 +28,7 @@ public final class Bag implements BagInterface {
         generateTiles();
     }
 
-    public Bag(final UsedTilesTakeInterface usedTiles, final long seed) {
+    public Bag(final UsedTilesTakeInterface usedTiles, final long seed) { //for easier testing
         tiles = new ArrayList();
         this.usedTiles = usedTiles;
         random = new Random(seed);
@@ -36,7 +36,7 @@ public final class Bag implements BagInterface {
 
     }
 
-    public Bag(final UsedTilesTakeInterface usedTiles, final ArrayList<Tile> tiles) {
+    public Bag(final UsedTilesTakeInterface usedTiles, final ArrayList<Tile> tiles) { //for easier testing
         this.usedTiles = usedTiles;
         this.tiles = tiles;
         random = new Random();

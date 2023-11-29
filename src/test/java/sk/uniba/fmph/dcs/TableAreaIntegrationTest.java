@@ -4,8 +4,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 import interfaces.TileSource;
@@ -53,11 +52,28 @@ public class TableAreaIntegrationTest {
     @Test
     public void takePlusEndOfTheRound() {
         tableArea.startNewRound();
-        assertEquals("Factory should contain 'LLBG'.", "LLBG", factory.state());
-        assertArrayEquals("take(1,0) should yield array of two Tile.BLACK", new ArrayList(List.of(Tile.BLACK, Tile.BLACK)).toArray(), tableArea.take(1, 0).toArray());
-        assertEquals("Factory now should be empty.", "", tileSources.get(1).state());
-        assertEquals("Rest (BG) should be in TableCenter with Tile.STARTING_PLAYER.", "SBG", tableCenter.state());
 
+        //Factory should contain 'LLBG
+        HashMap<Character, Integer> m = new HashMap<>();
+        for (char c : factory.state().toCharArray())
+            try {
+                m.put(c, m.get(c) + 1);
+            } catch (NullPointerException e) {
+                m.put(c, 1);
+            }
+        assertEquals("Factory should contain 'LLBG'.", "{B=1, G=1, L=2}", m.toString());
+        assertArrayEquals("take(1,0) should yield array of two Tile.BLACK", new ArrayList(List.of(Tile.BLACK, Tile.BLACK)).toArray(), tableArea.take(1, tableArea.state().indexOf("L") - 1).toArray());
+        assertEquals("Factory now should be empty.", "", tileSources.get(1).state());
+
+        m = new HashMap<>();
+        for (char c : tableCenter.state().toCharArray())
+            try {
+                m.put(c, m.get(c) + 1);
+            } catch (NullPointerException e) {
+                m.put(c, 1);
+            }
+
+        assertEquals("Rest (BG) should be in TableCenter with Tile.STARTING_PLAYER.", "{B=1, S=1, G=1}", m.toString());
         assertEquals("there still should not be end of the round because of TableCenter", false, tableArea.isRoundEnd());
         tableArea.take(0, 0);
         tableArea.take(0, 0);
