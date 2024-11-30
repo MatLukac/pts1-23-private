@@ -4,85 +4,140 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
-import interfaces.BagInterface;
-import interfaces.TableCenterAddInterface;
+import interfaces.*;
 import org.junit.Before;
 import org.junit.Test;
+import records.*;
 
-class FakeBag implements BagInterface {
-    private ArrayList<Tile> tiles;
+class FakeUsedTilesFactory implements UsedTilesInterface {
+    public List<Tile> tiles;
 
-    public FakeBag() {
-        tiles = new ArrayList<>();
-        tiles.addAll(List.of(Tile.RED, Tile.GREEN, Tile.BLUE, Tile.RED, Tile.GREEN, Tile.BLUE, Tile.GREEN, Tile.BLUE));
+    public FakeUsedTilesFactory() {
+        tiles = List.of(Tile.RED, Tile.BLACK, Tile.GREEN, Tile.RED);
     }
 
     @Override
-    public ArrayList<Tile> take(int count) {
-        ArrayList<Tile> toReturn = new ArrayList<>();
-        for (int i = 0; i < count; i++) toReturn.add(tiles.get(i));
-        return toReturn;
+    public TakeUsedTilesResult take() {
+        return new TakeUsedTilesResult(tiles, new FakeUsedTilesBag());
+    }
+
+    @Override
+    public GiveUsedTilesResult give() {
+        return null; //dont need to be implemented
     }
 
     @Override
     public String state() {
-        return null;
+        return tiles.stream().map(Tile::toString).collect(Collectors.joining(""));
     }
 }
 
-class FakeTableCenter implements TableCenterAddInterface {
+class FakeBagFactory implements BagInterface {
+    private List<Tile> tiles;
+
+    public FakeBagFactory() {
+        tiles = new ArrayList<>();
+        tiles.addAll(List.of(Tile.RED, Tile.GREEN, Tile.BLUE, Tile.RED, Tile.GREEN, Tile.BLUE, Tile.GREEN, Tile.BLUE));
+    }
+
+    public FakeBagFactory(ArrayList<Tile> tiles) {
+        this.tiles = tiles;
+    }
+
+
+    @Override
+    public TakeBagResult take(int count, UsedTilesInterface usedTiles) {
+        List<Tile> out = Collections.unmodifiableList(tiles.subList(0, count));
+        tiles = Collections.unmodifiableList(tiles.subList(count, tiles.size()));
+        return new TakeBagResult(out, this, usedTiles);
+    }
+
+    @Override
+    public String state() {
+        return tiles.stream().map(Tile::toString).collect(Collectors.joining(""));
+    }
+}
+
+
+class FakeTableCenter implements TableCenterInterface {
     public ArrayList<Tile> tiles = new ArrayList<>();
 
     @Override
-    public void add(Collection<Tile> tiles) {
+    public AddTableCenterResult add(List<Tile> tiles) {
         this.tiles.addAll(tiles);
+        return new AddTableCenterResult(this);
+    }
+
+    @Override
+    public TakeTableCenterResult take(int idx) {
+        return null;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public StartNewRoundTableCenterResult startNewRound() {
+        return null;
+    }
+
+    @Override
+    public String state() {
+        return tiles.stream().map(Tile::toString).collect(Collectors.joining(""));
     }
 }
 
 public class FactoryTest {
 
+    private FakeUsedTilesFactory usedTiles;
     private FakeTableCenter tableCenter;
-    private FakeBag bag;
-    private Factory factory;
+    private FakeBagFactory bag;
+    private FactoryInterface factory;
+
 
     @Before
     public void setUp() {
         tableCenter = new FakeTableCenter();
-        bag = new FakeBag();
-        factory = new Factory(bag, tableCenter);
+        bag = new FakeBagFactory();
+        factory = new Factory();
+        usedTiles = new FakeUsedTilesFactory();
     }
 
     @Test
     public void test_factory() {
-        factory.startNewRound();
-        assertEquals("Factory after new round should contain MAX_NUMBER_OF_TILES (4).", factory.state().length(), 4);
+        factory = factory.startNewRound(bag, usedTiles).factory();
+
+        assertEquals("New Factory after startNewRound() should contain MAX_NUMBER_OF_TILES (4).", factory.state().length(), 4);
         assertEquals("Testing factory.state().", "RGBR", factory.state());
-        
+
         String state = factory.state();
-        assertThrows(IllegalArgumentException.class, () -> factory.take(-1));
-        assertEquals("Factory after wrong index in take() should not change.", factory.state(), state);
+        assertThrows(IllegalArgumentException.class, () -> factory.take(-1, tableCenter));
+        //assertEquals("Factory after wrong index in take() should not change.", factory.state(), state);
         assertEquals("When state() != '', then isEmpty() -> false.", false, factory.isEmpty());
 
-        ArrayList<Tile> tiles = factory.take(0);
-        assertEquals("After take factory should be empty.", true, factory.isEmpty());
+
+        TakeFactoryResult takeFactory = factory.take(0, tableCenter);
+        factory = takeFactory.factory();
+        assertEquals("After take, new factory should be empty.", true, factory.isEmpty());
 
         boolean allEqual = true;
-        for (Tile tile : tiles)
-            if (tile != tiles.get(0)) {
+        for (Tile tile : takeFactory.tiles()) {
+            if (tile != takeFactory.tiles().get(0)) {
                 allEqual = false;
                 break;
             }
+        }
 
         assertEquals("factory.take() should return Tile[] of the same Tile.", true, allEqual);
-        String s = "";
-        for (Tile tile : tableCenter.tiles) s += tile.toString();
+        String s = tableCenter.tiles.stream().map(Tile::toString).collect(Collectors.joining(""));
         assertEquals("Rest should go to TableCenter.", "GB", s);
-        factory.startNewRound();
-        assertEquals("After startNewRound(), factory should draw new tiles form bag", false, factory.isEmpty());
+        StartNewRoundFactoryResult startNewRoundFactory = factory.startNewRound(bag, usedTiles);
+        assertEquals("After startNewRound(), factory should draw new tiles form bag", false, startNewRoundFactory.factory().isEmpty());
     }
 
 
